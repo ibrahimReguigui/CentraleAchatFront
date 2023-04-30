@@ -31,8 +31,10 @@ import {AppInvoiceComponent} from './pages/app.invoice.component';
 import {AppHelpComponent} from './pages/app.help.component';
 import {BlocksComponent} from './blocks/blocks/blocks.component';
 import {RegistrationComponent} from "./view/registration/registration.component";
-import {ProfileComponent} from "./view/profile/profile.component";
+import {ProfileComponent} from "./view/user/user-profile/profile.component";
 import {AuthGuard} from "./service/security/authGuard";
+import {CompanyProfileComponent} from "./view/company-profile/company-profile.component";
+import {UpdateProfileComponent} from "./view/user/update-profile/update-profile.component";
 
 //,canActivate:[AuthGuard], data:{roles:['CLIENT']
 @NgModule({
@@ -69,6 +71,9 @@ import {AuthGuard} from "./service/security/authGuard";
                     {path: 'documentation', component: DocumentationComponent},
                     {path: 'blocks', component: BlocksComponent},
                     {path: 'profile', component: ProfileComponent,canActivate:[AuthGuard]},
+                    {path: 'company', component: CompanyProfileComponent,canActivate:[AuthGuard]},
+                    {path: 'updateProfile', component: UpdateProfileComponent,canActivate:[AuthGuard]},
+
                 ]
             },
 

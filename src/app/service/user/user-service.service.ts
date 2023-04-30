@@ -15,11 +15,15 @@ export class UserServiceService {
         return new HttpHeaders().set('Authorization', `Bearer ${token}`);
     }
     addUser(user : User) {
-        console.log(user.role)
         return this.http.post(`${this.url}/registerSupplierClient`,user)
     }
     getProfile(): Observable<any> {
         let headers =new HttpHeaders().set('Authorization', 'Bearer ' + this.getAuthHeaders());
         return this.http.get(this.url+'/profile', { headers });
+    }
+    updateUser(user : any) {
+        let headers =new HttpHeaders().set('Authorization', 'Bearer ' + this.getAuthHeaders());
+        console.log("service"+user.given_name)
+        return this.http.put(`${this.url}/updateProfile`,user, { headers })
     }
 }

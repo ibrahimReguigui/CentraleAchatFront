@@ -5,4 +5,5 @@ export class Company {
     logo!:String;
     companyPhoneNumber!:number;
     idUsers!:String[];
+    lineOfBusiness!:String
 }

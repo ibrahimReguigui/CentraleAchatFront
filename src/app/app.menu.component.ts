@@ -24,7 +24,22 @@ export class AppMenuComponent implements OnInit {
                 ]
             },
             {
-                label: 'UI Kit', icon: 'pi pi-fw pi-star-fill', routerLink: ['/uikit'],
+                label: 'Account', icon: 'pi pi-fw pi-star-fill',
+                items: [
+                    {label: 'Profile', icon: 'pi pi-fw pi-id-card', routerLink: ['/profile']},
+                    {label: 'Company', icon: 'pi pi-fw pi-id-card', routerLink: ['/company']},
+
+                ]
+            },
+            {
+                label:'Prime Blocks', icon:'pi pi-fw pi-prime', routerLink: ['/blocks'],
+                items:[
+                    {label: 'Free Blocks', icon: 'pi pi-fw pi-eye', routerLink: ['/blocks']},
+                    {label: 'All Blocks', icon: 'pi pi-fw pi-globe', url: ['https://www.primefaces.org/primeblocks-ng'], target: '_blank'},
+                ]
+            },
+            {
+                label: 'Utilities', icon: 'pi pi-fw pi-compass', routerLink: ['/utilities'],
                 items: [
                     {label: 'Form Layout', icon: 'pi pi-fw pi-id-card', routerLink: ['/uikit/formlayout']},
                     {label: 'Input', icon: 'pi pi-fw pi-check-square', routerLink: ['/uikit/input']},
@@ -41,19 +56,7 @@ export class AppMenuComponent implements OnInit {
                     {label: 'Message', icon: 'pi pi-fw pi-comment', routerLink: ['/uikit/message']},
                     {label: 'File', icon: 'pi pi-fw pi-file', routerLink: ['/uikit/file']},
                     {label: 'Chart', icon: 'pi pi-fw pi-chart-bar', routerLink: ['/uikit/charts']},
-                    {label: 'Misc', icon: 'pi pi-fw pi-circle-off', routerLink: ['/uikit/misc']}
-                ]
-            },
-            {
-                label:'Prime Blocks', icon:'pi pi-fw pi-prime', routerLink: ['/blocks'],
-                items:[
-                    {label: 'Free Blocks', icon: 'pi pi-fw pi-eye', routerLink: ['/blocks']},
-                    {label: 'All Blocks', icon: 'pi pi-fw pi-globe', url: ['https://www.primefaces.org/primeblocks-ng'], target: '_blank'},
-                ]
-            },
-            {
-                label: 'Utilities', icon: 'pi pi-fw pi-compass', routerLink: ['/utilities'],
-                items: [
+                    {label: 'Misc', icon: 'pi pi-fw pi-circle-off', routerLink: ['/uikit/misc']},
                     {label: 'PrimeIcons', icon: 'pi pi-fw pi-prime', routerLink: ['utilities/icons']},
                     {label: 'PrimeFlex', icon: 'pi pi-fw pi-desktop', url: ['https://www.primefaces.org/primeflex/'], target: '_blank'},
                 ]

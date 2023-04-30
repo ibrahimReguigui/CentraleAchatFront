@@ -3,10 +3,12 @@ import {User} from "../../domain/user";
 import {Company} from "../../domain/company";
 import {UserServiceService} from "../../service/user/user-service.service";
 import {AppBreadcrumbService} from "../../app.breadcrumb.service";
+import {MessageService} from "primeng/api";
 
 @Component({
   selector: 'app-registration',
   templateUrl: './registration.component.html',
+    providers: [MessageService],
     styles: [`:host ::ng-deep .p-multiselect {
         min-width: 15rem;
     }
@@ -63,9 +65,9 @@ export class RegistrationComponent {
 
     user: User = new User();
     company:Company=new Company();
+    uploadedFiles: any[] = [];
 
-
-    constructor(private userService: UserServiceService, private breadcrumbService: AppBreadcrumbService) {
+    constructor(private userService: UserServiceService,private messageService: MessageService, private breadcrumbService: AppBreadcrumbService) {
         this.breadcrumbService.setItems([
             {label: 'UI Kit'},
             {label: 'Input'}
@@ -85,6 +87,13 @@ export class RegistrationComponent {
                 console.log(error.status);
                 console.log(error.statusText);
             })
+    }
+    onUpload(event) {
+        for (const file of event.files) {
+            this.uploadedFiles.push(file);
+        }
+        console.log(this.uploadedFiles)
+        this.messageService.add({severity: 'info', summary: 'Success', detail: 'File Uploaded'});
     }
 }
 

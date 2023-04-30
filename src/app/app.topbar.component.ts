@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
 import {AppComponent} from './app.component';
 import {AppMainComponent} from './app.main.component';
+import {UserServiceService} from "./service/user/user-service.service";
 
 @Component({
     selector: 'app-topbar',
@@ -154,7 +155,7 @@ import {AppMainComponent} from './app.main.component';
                                     <h6 class="header-text">Settings</h6>
                                 </li>
                                 <li role="menuitem">
-                                    <a href="#" (click)="appMain.onTopbarSubItemClick($event)">
+                                    <a routerLink="['profile']" (click)="appMain.onTopbarSubItemClick($event)">
                                         <i class="pi pi-user"></i>
                                         <div class="settings-item">
                                             <h6>Account Info</h6>
@@ -192,8 +193,8 @@ import {AppMainComponent} from './app.main.component';
                             <a href="#" (click)="appMain.onTopbarItemClick($event,profile)">
                                 <img class="profile-image" src="assets/layout/images/avatar-profile.png" alt="demo">
                                 <div class="profile-info">
-                                    <h6>Peter Taylor</h6>
-                                    <span>Webmaster</span>
+                                    <h6>{{user.given_name +" " +user.family_name}}</h6>
+                                    <span>{{user.realm_access.roles[3]}}</span>
                                 </div>
                             </a>
 
@@ -201,27 +202,9 @@ import {AppMainComponent} from './app.main.component';
                                 <li class="layout-submenu-header">
                                     <img class="profile-image" src="assets/layout/images/avatar-profile.png" alt="demo">
                                     <div class="profile-info">
-                                        <h6>Peter Taylor</h6>
-                                        <span>Webmaster</span>
+                                        <h6>{{user.given_name +" " +user.family_name}}</h6>
+                                        <span>{{user.realm_access.roles[3]}}</span>
                                     </div>
-                                </li>
-                                <li role="menuitem">
-                                    <a href="#" (click)="appMain.onTopbarSubItemClick($event)">
-                                        <i class="pi pi-cog"></i>
-                                        <h6>Settings</h6>
-                                    </a>
-                                </li>
-                                <li role="menuitem">
-                                    <a href="#" (click)="appMain.onTopbarSubItemClick($event)">
-                                        <i class="pi pi-file"></i>
-                                        <h6>Terms of Usage</h6>
-                                    </a>
-                                </li>
-                                <li role="menuitem">
-                                    <a href="#" (click)="appMain.onTopbarSubItemClick($event)">
-                                        <i class="pi pi-compass"></i>
-                                        <h6>Support</h6>
-                                    </a>
                                 </li>
                                 <li role="menuitem">
                                     <a href="#" (click)="appMain.onTopbarSubItemClick($event)">
@@ -243,7 +226,13 @@ import {AppMainComponent} from './app.main.component';
 })
 export class AppTopBarComponent {
 
-    constructor(public appMain: AppMainComponent, public app: AppComponent) {
+    constructor(public appMain: AppMainComponent, public app: AppComponent,private userService: UserServiceService) {
     }
-
+    user:any;
+    ngOnInit(): void {
+        this.userService.getProfile().subscribe(
+            r=>{
+                this.user=r;
+            })
+    }
 }

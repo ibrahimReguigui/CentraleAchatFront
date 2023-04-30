@@ -143,7 +143,9 @@ import {AppBreadcrumbService} from './app.breadcrumb.service';
 import {KeycloakAngularModule, KeycloakService} from "keycloak-angular";
 import {initializeKeycloak} from "./service/security/initializeKeycloak";
 import { RegistrationComponent } from './view/registration/registration.component';
-import { ProfileComponent } from './view/profile/profile.component';
+import { ProfileComponent } from './view/user/user-profile/profile.component';
+import { CompanyProfileComponent } from './view/company-profile/company-profile.component';
+import { UpdateProfileComponent } from './view/user/update-profile/update-profile.component';
 
 @NgModule({
     imports: [
@@ -278,7 +280,9 @@ import { ProfileComponent } from './view/profile/profile.component';
         BlocksComponent,
         BlockViewer,
         RegistrationComponent,
-        ProfileComponent
+        ProfileComponent,
+        CompanyProfileComponent,
+        UpdateProfileComponent
     ],
     providers: [
         {

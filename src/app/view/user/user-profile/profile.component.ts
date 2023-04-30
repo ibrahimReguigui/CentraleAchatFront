@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {UserServiceService} from "../../service/user/user-service.service";
+import {UserServiceService} from "../../../service/user/user-service.service";
 
 @Component({
-  selector: 'app-profile',
+  selector: 'app-user-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.scss']
 })
