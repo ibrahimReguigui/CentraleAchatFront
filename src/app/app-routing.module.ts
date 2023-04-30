@@ -30,10 +30,15 @@ import {AppTimelineDemoComponent} from './pages/app.timelinedemo.component';
 import {AppInvoiceComponent} from './pages/app.invoice.component';
 import {AppHelpComponent} from './pages/app.help.component';
 import {BlocksComponent} from './blocks/blocks/blocks.component';
+import {RegistrationComponent} from "./view/registration/registration.component";
+import {ProfileComponent} from "./view/profile/profile.component";
+import {AuthGuard} from "./service/security/authGuard";
 
+//,canActivate:[AuthGuard], data:{roles:['CLIENT']
 @NgModule({
     imports: [
         RouterModule.forRoot([
+            {path: 'register', component: RegistrationComponent},
             {
                 path: '', component: AppMainComponent,
                 children: [
@@ -63,8 +68,10 @@ import {BlocksComponent} from './blocks/blocks/blocks.component';
                     {path: 'pages/empty', component: EmptyDemoComponent},
                     {path: 'documentation', component: DocumentationComponent},
                     {path: 'blocks', component: BlocksComponent},
+                    {path: 'profile', component: ProfileComponent,canActivate:[AuthGuard]},
                 ]
             },
+
             {path: 'error', component: AppErrorComponent},
             {path: 'access', component: AppAccessdeniedComponent},
             {path: 'notfound', component: AppNotfoundComponent},

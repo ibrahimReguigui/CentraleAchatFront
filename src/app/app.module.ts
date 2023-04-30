@@ -1,4 +1,4 @@
-import {NgModule, CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
+import {NgModule, CUSTOM_ELEMENTS_SCHEMA, APP_INITIALIZER} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import {BrowserModule} from '@angular/platform-browser';
@@ -140,6 +140,10 @@ import {ConfigService} from './demo/service/app.config.service';
 
 import {MenuService} from './app.menu.service';
 import {AppBreadcrumbService} from './app.breadcrumb.service';
+import {KeycloakAngularModule, KeycloakService} from "keycloak-angular";
+import {initializeKeycloak} from "./service/security/initializeKeycloak";
+import { RegistrationComponent } from './view/registration/registration.component';
+import { ProfileComponent } from './view/profile/profile.component';
 
 @NgModule({
     imports: [
@@ -228,7 +232,8 @@ import {AppBreadcrumbService} from './app.breadcrumb.service';
         TreeModule,
         TreeTableModule,
         VirtualScrollerModule,
-        AppCodeModule
+        AppCodeModule,
+        KeycloakAngularModule
     ],
     declarations: [
         AppComponent,
@@ -271,9 +276,17 @@ import {AppBreadcrumbService} from './app.breadcrumb.service';
         AppErrorComponent,
         AppAccessdeniedComponent,
         BlocksComponent,
-        BlockViewer
+        BlockViewer,
+        RegistrationComponent,
+        ProfileComponent
     ],
     providers: [
+        {
+            provide: APP_INITIALIZER,
+            useFactory: initializeKeycloak,
+            multi: true,
+            deps: [KeycloakService],
+        },
         {provide: LocationStrategy, useClass: HashLocationStrategy},
         CountryService, CustomerService, EventService, IconService, NodeService,
         PhotoService, ProductService, MenuService, AppBreadcrumbService, ConfigService

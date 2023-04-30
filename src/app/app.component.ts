@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import { PrimeNGConfig } from 'primeng/api';
+import {UserServiceService} from "./service/user/user-service.service";
 
 @Component({
     selector: 'app-root',
@@ -21,9 +22,13 @@ export class AppComponent implements OnInit{
 
     ripple: boolean;
 
-    constructor(private primengConfig: PrimeNGConfig) {}
+    constructor(private primengConfig: PrimeNGConfig,private userService:UserServiceService) {}
 
     ngOnInit() {
         this.primengConfig.ripple = true;
+        this.userService.getProfile().subscribe(
+            r=>{
+                console.log(r)
+            })
     }
 }
