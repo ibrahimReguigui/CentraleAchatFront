@@ -238,8 +238,6 @@ export class AppTopBarComponent {
             })
     }
     logout() {
-        this.keycloakService.logout().then(
-            r=>this.router.navigate(['/login'])
-        );
+        this.keycloakService.logout('http://localhost:4200/#/login')
     }
 }
