@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {UserServiceService} from "../../../service/user/user-service.service";
 import {Router} from "@angular/router";
+import {User} from "../../../domain/user";
 
 @Component({
   selector: 'app-update-profile',
@@ -17,10 +18,15 @@ export class UpdateProfileComponent implements OnInit{
             })
     }
     updateProfile(){
-        console.log(this.user.given_name)
-        this.userService.updateUser(this.user).subscribe(
+        let upUser:User=new User();
+        upUser.firstName=this.user.given_name
+        upUser.lastName=this.user.family_name
+        upUser.role=this.user.realm_access.roles[3]
+        upUser.phoneNumber=this.user.phoneNumber
+        upUser.adress=this.user.adress
+        upUser.image=this.user.image
+        this.userService.updateUser(upUser).subscribe(
             (response: any) => {
-                console.log(this.user.given_name)
                 this.router.navigate(['/profile'])
             },
             (error: any) => {

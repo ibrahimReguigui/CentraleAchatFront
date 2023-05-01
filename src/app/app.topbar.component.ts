@@ -2,6 +2,8 @@ import {Component} from '@angular/core';
 import {AppComponent} from './app.component';
 import {AppMainComponent} from './app.main.component';
 import {UserServiceService} from "./service/user/user-service.service";
+import {KeycloakService} from "keycloak-angular";
+import {Router} from "@angular/router";
 
 @Component({
     selector: 'app-topbar',
@@ -155,7 +157,7 @@ import {UserServiceService} from "./service/user/user-service.service";
                                     <h6 class="header-text">Settings</h6>
                                 </li>
                                 <li role="menuitem">
-                                    <a routerLink="['profile']" (click)="appMain.onTopbarSubItemClick($event)">
+                                    <a [routerLink]="['/profile']" (click)="appMain.onTopbarSubItemClick($event)">
                                         <i class="pi pi-user"></i>
                                         <div class="settings-item">
                                             <h6>Account Info</h6>
@@ -207,7 +209,7 @@ import {UserServiceService} from "./service/user/user-service.service";
                                     </div>
                                 </li>
                                 <li role="menuitem">
-                                    <a href="#" (click)="appMain.onTopbarSubItemClick($event)">
+                                    <a href="#" (click)="logout()">
                                         <i class="pi pi-power-off"></i>
                                         <h6>Logout</h6>
                                     </a>
@@ -226,7 +228,7 @@ import {UserServiceService} from "./service/user/user-service.service";
 })
 export class AppTopBarComponent {
 
-    constructor(public appMain: AppMainComponent, public app: AppComponent,private userService: UserServiceService) {
+    constructor(private router:Router,public appMain: AppMainComponent, public app: AppComponent,private userService: UserServiceService,private keycloakService: KeycloakService) {
     }
     user:any;
     ngOnInit(): void {
@@ -234,5 +236,10 @@ export class AppTopBarComponent {
             r=>{
                 this.user=r;
             })
+    }
+    logout() {
+        this.keycloakService.logout().then(
+            r=>this.router.navigate(['/login'])
+        );
     }
 }

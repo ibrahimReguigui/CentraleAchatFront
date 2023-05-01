@@ -11,4 +11,5 @@ export class User {
     password!:String;
     companyDto!:Company
     adress!:String
+    image!:String
 }
