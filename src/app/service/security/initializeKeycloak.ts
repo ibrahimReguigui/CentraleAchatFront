@@ -1,5 +1,6 @@
 import {KeycloakService} from "keycloak-angular";
 
+
 export function initializeKeycloak(keycloak: KeycloakService) {
     return () =>
         keycloak.init({
@@ -10,7 +11,7 @@ export function initializeKeycloak(keycloak: KeycloakService) {
             },
             initOptions: {
                 onLoad: 'check-sso',
-                checkLoginIframe: true
+                checkLoginIframe: true,
             },
         });
 }
