@@ -1,5 +1,4 @@
 import {NgModule, CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import {BrowserModule} from '@angular/platform-browser';
 import {HashLocationStrategy, LocationStrategy} from '@angular/common';
@@ -140,7 +139,6 @@ import {ConfigService} from './demo/service/app.config.service';
 
 import {MenuService} from './app.menu.service';
 import {AppBreadcrumbService} from './app.breadcrumb.service';
-
 import {KeycloakAngularModule, KeycloakService} from "keycloak-angular";
 import {initializeKeycloak} from "./service/security/initializeKeycloak";
 import { RegistrationComponent } from './view/registration/registration.component';
@@ -153,13 +151,21 @@ import { RecaptchaModule } from 'ng-recaptcha';
 import { ProductComponent } from './product/product.component';
 import { CategorieComponent } from './demo/domain/categorie/categorie.component';
 import { ChartComponent } from './demo/domain/chart/chart.component';
-
+import { ReviewComponent } from './view/review/review.component';
+import { TestComponent } from './view/test/test.component';
+import { UpdateReviewComponent } from './view/update-review/update-review.component';
+import { GetReviewComponent } from './view/get-review/get-review.component';
+import { AddOfferComponent } from './view/add-offer/add-offer.component';
+import { BestProductDashboardComponent } from './view/best-product-dashboard/best-product-dashboard.component';
+import { GetOfferComponent } from './view/get-offer/get-offer.component';
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 
 @NgModule({
     imports: [
         RecaptchaModule,
         BrowserModule,
         FormsModule,
+        ReactiveFormsModule,
         AppRoutingModule,
         HttpClientModule,
         BrowserAnimationsModule,
@@ -244,7 +250,8 @@ import { ChartComponent } from './demo/domain/chart/chart.component';
         TreeTableModule,
         VirtualScrollerModule,
         AppCodeModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        FormsModule
     ],
     declarations: [
         AppComponent,
@@ -296,14 +303,15 @@ import { ChartComponent } from './demo/domain/chart/chart.component';
         GetAllUserComponent,
         ProductComponent,
         CategorieComponent,
-        ChartComponent
+        ChartComponent,
+        ReviewComponent, TestComponent, UpdateReviewComponent, GetReviewComponent, AddOfferComponent, BestProductDashboardComponent, GetOfferComponent
     ],
     providers: [
         {provide: LocationStrategy, useClass: HashLocationStrategy},
         CountryService, CustomerService, EventService, IconService, NodeService,
         PhotoService, ProductService, MenuService, AppBreadcrumbService, ConfigService
     ],
-    bootstrap: [AppComponent]
+    bootstrap: [AppComponent] //ici on ecrit le composant de démarrage
 })
 export class AppModule {
 }

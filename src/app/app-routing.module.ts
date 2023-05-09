@@ -31,6 +31,7 @@ import {AppTimelineDemoComponent} from './pages/app.timelinedemo.component';
 import {AppInvoiceComponent} from './pages/app.invoice.component';
 import {AppHelpComponent} from './pages/app.help.component';
 import {BlocksComponent} from './blocks/blocks/blocks.component';
+
 import {RegistrationComponent} from "./view/registration/registration.component";
 import {ProfileComponent} from "./view/user/user-profile/profile.component";
 import {AuthGuard} from "./service/security/authGuard";
@@ -41,12 +42,34 @@ import {GetAllUserComponent} from "./view/user/get-all-user/get-all-user.compone
 import {CategorieComponent} from "./demo/domain/categorie/categorie.component";
 import {ChartComponent} from "./demo/domain/chart/chart.component";
 
+
+
+import {ReviewComponent } from './view/review/review.component';
+import { TestComponent } from './view/test/test.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { UpdateReviewComponent } from './view/update-review/update-review.component';
+import { GetReviewComponent } from './view/get-review/get-review.component';
+import { AddOfferComponent } from './view/add-offer/add-offer.component';
+import { BestProductDashboardComponent } from './view/best-product-dashboard/best-product-dashboard.component';
+
+
+
 @NgModule({
     imports: [
+
         RouterModule.forRoot([
             {
                 path: '', component: AppMainComponent,
                 children: [
+
+                    {path: 'addoffer', component: AddOfferComponent},
+                    {path: 'review', component: ReviewComponent},
+                    {path: 'updatereview/:id', component: UpdateReviewComponent},
+                    {path: 'getreview', component: GetReviewComponent},
+                    {path: 'bestProductsDashboard', component: BestProductDashboardComponent},
+
+
+                    {path: 'test', component: TestComponent},
                     {path: '', component: DashboardDemoComponent},
                     {path: 'uikit/formlayout', component: FormLayoutDemoComponent},
                     {path: 'uikit/floatlabel', component: FloatLabelDemoComponent},
