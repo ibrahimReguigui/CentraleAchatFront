@@ -12,6 +12,7 @@ import {MiscDemoComponent} from './demo/view/miscdemo.component';
 import {EmptyDemoComponent} from './demo/view/emptydemo.component';
 import {ChartsDemoComponent} from './demo/view/chartsdemo.component';
 import {FileDemoComponent} from './demo/view/filedemo.component';
+
 import {DocumentationComponent} from './demo/view/documentation.component';
 import {AppMainComponent} from './app.main.component';
 import {AppNotfoundComponent} from './pages/app.notfound.component';
@@ -30,15 +31,12 @@ import {AppTimelineDemoComponent} from './pages/app.timelinedemo.component';
 import {AppInvoiceComponent} from './pages/app.invoice.component';
 import {AppHelpComponent} from './pages/app.help.component';
 import {BlocksComponent} from './blocks/blocks/blocks.component';
-import {RegistrationComponent} from "./view/registration/registration.component";
-import {ProfileComponent} from "./view/profile/profile.component";
-import {AuthGuard} from "./service/security/authGuard";
+import {CategorieComponent} from "./demo/domain/categorie/categorie.component";
+import {ChartComponent} from "./demo/domain/chart/chart.component";
 
-//,canActivate:[AuthGuard], data:{roles:['CLIENT']
 @NgModule({
     imports: [
         RouterModule.forRoot([
-            {path: 'register', component: RegistrationComponent},
             {
                 path: '', component: AppMainComponent,
                 children: [
@@ -68,10 +66,11 @@ import {AuthGuard} from "./service/security/authGuard";
                     {path: 'pages/empty', component: EmptyDemoComponent},
                     {path: 'documentation', component: DocumentationComponent},
                     {path: 'blocks', component: BlocksComponent},
-                    {path: 'profile', component: ProfileComponent,canActivate:[AuthGuard]},
+                    {path: 'categorie', component: CategorieComponent},
+                    {path: 'chart', component: ChartComponent},
+
                 ]
             },
-
             {path: 'error', component: AppErrorComponent},
             {path: 'access', component: AppAccessdeniedComponent},
             {path: 'notfound', component: AppNotfoundComponent},

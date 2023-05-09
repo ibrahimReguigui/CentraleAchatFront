@@ -1,5 +1,5 @@
-import {NgModule, CUSTOM_ELEMENTS_SCHEMA, APP_INITIALIZER} from '@angular/core';
-import {FormsModule} from '@angular/forms';
+import {NgModule, CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import {BrowserModule} from '@angular/platform-browser';
 import {HashLocationStrategy, LocationStrategy} from '@angular/common';
@@ -140,10 +140,9 @@ import {ConfigService} from './demo/service/app.config.service';
 
 import {MenuService} from './app.menu.service';
 import {AppBreadcrumbService} from './app.breadcrumb.service';
-import {KeycloakAngularModule, KeycloakService} from "keycloak-angular";
-import {initializeKeycloak} from "./service/security/initializeKeycloak";
-import { RegistrationComponent } from './view/registration/registration.component';
-import { ProfileComponent } from './view/profile/profile.component';
+import { ProductComponent } from './product/product.component';
+import { CategorieComponent } from './demo/domain/categorie/categorie.component';
+import { ChartComponent } from './demo/domain/chart/chart.component';
 
 @NgModule({
     imports: [
@@ -233,7 +232,7 @@ import { ProfileComponent } from './view/profile/profile.component';
         TreeTableModule,
         VirtualScrollerModule,
         AppCodeModule,
-        KeycloakAngularModule
+        ReactiveFormsModule
     ],
     declarations: [
         AppComponent,
@@ -277,16 +276,11 @@ import { ProfileComponent } from './view/profile/profile.component';
         AppAccessdeniedComponent,
         BlocksComponent,
         BlockViewer,
-        RegistrationComponent,
-        ProfileComponent
+        ProductComponent,
+        CategorieComponent,
+        ChartComponent
     ],
     providers: [
-        {
-            provide: APP_INITIALIZER,
-            useFactory: initializeKeycloak,
-            multi: true,
-            deps: [KeycloakService],
-        },
         {provide: LocationStrategy, useClass: HashLocationStrategy},
         CountryService, CustomerService, EventService, IconService, NodeService,
         PhotoService, ProductService, MenuService, AppBreadcrumbService, ConfigService
