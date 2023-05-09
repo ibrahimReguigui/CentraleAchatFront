@@ -1,76 +1,4 @@
-<!--<div class="grid p-fluid" xmlns="http://www.w3.org/1999/html">
-    <div class="col-12 md:col-6">
-        <form #f="ngForm">
-            <div class="card">
 
-                <h3 style="text-align: center">Registration Form</h3>
-                <h5>User Infos</h5>
-                <div class="grid formgrid">
-                    <div class="col-12 mb-2 lg:col-4 lg:mb-0">
-					<span class="p-input-icon-left">
-						<i class="pi pi-user"></i>
-						<input type="text" pInputText placeholder="First Name" name="First Name"
-                               [(ngModel)]="user.firstName" required minlength="3" #firstName="ngModel"/>
-                        <div *ngIf="firstName.invalid">
-                            invalid
-                        </div>
-					</span>
-                    </div>
-                    <div class="col-12 mb-2 lg:col-4 lg:mb-0">
-					<span class="p-input-icon-left">
-						<i class="pi pi-user"></i>
-						<input type="text" pInputText placeholder="Last Name" name="Last Name"
-                               [(ngModel)]="user.lastName" required minlength="3" #lastName="ngModel"/>
-
-                    <div *ngIf="lastName.invalid">
-                            invalid
-                        </div></span>
-                    </div>
-
-                </div>
-                <h5></h5>
-                <p-calendar [showIcon]="true" inputId="icon" placeholder="Birthdate" name="Birthdate"
-                            [(ngModel)]="user.birthDate" required #birthDate="ngModel"></p-calendar>
-                <div *ngIf="birthDate.invalid">
-                    invalid
-                </div>
-                <h5></h5>
-                <input placeholder="Email" name="Email"
-                         [(ngModel)]="user.email"  #email="ngModel"/>
-                <div *ngIf="email.invalid">
-                    invalid
-                </div>
-                <h5></h5>
-                <p-inputNumber mode="decimal" placeholder="Phone Number" name="Phone Number"
-                               [(ngModel)]="user.phoneNumber" required #phoneNumber="ngModel">
-                </p-inputNumber>
-                <div *ngIf="phoneNumber.invalid">
-                    invalid
-                </div>
-                <h5>Securite</h5>
-                <input placeholder="Password" name="Password"
-                         [(ngModel)]="user.password"  #password="ngModel"/>
-
-                <h5>Acount Type</h5>
-                <p-autoComplete [(ngModel)]="user.role" [suggestions]="role" name="role"
-                                (completeMethod)="filterRole($event)"
-                                field="name" [dropdown]="true">
-                </p-autoComplete>
-
-
-                <h5></h5>
-                <div class="col-12 md:col-6">
-                    <button pButton pRipple
-                            [disabled]="f.invalid" (click)="addUser(f.value)"
-                            type="button" label="Register" class="p-button-rounded p-button-success mr-2 mb-2"></button>
-                </div>
-
-
-            </div>
-
-        </form>
-    </div>
-</div>-->
 <div style="width: 100%;background-color: lightgray ">
     <h2 style="text-align: center">Registration</h2>
     <div class="grid" style="display: inline-block;margin: 0 auto;margin-left: 100px
@@ -160,9 +88,9 @@
                     </div>
                     <h1></h1>
                 </form>
-                <form #fc="ngForm" *ngIf="user.role==role[0]">
+                <form #fc="ngForm" >
 
-                    <div class="p-fluid p-formgrid grid">
+                    <div class="p-fluid p-formgrid grid" *ngIf="user.role==role[0]">
                         <div class="field col-12 md:col-6">
                             <label htmlFor="firstname2">Company Name</label>
                             <input pInputText id="companyName" type="text"
@@ -189,16 +117,24 @@
                                    [(ngModel)]="company.logo" #logo="ngModel"/>
                         </div>
                     </div>
+                    <div [hidden]="captcha">
+                        <p>Are you Humain ?</p>
+                        <re-captcha (resolved)="resolved($event)" siteKey="6Lc_yt0lAAAAAEbxf8ToxgMfQK5VE8I66kkLDUNd"></re-captcha>
+                    </div>
+                    <div [hidden]="!captcha">
+                        <button *ngIf="user.role==role[0]" style="display: block;margin: 0 auto" pButton label="Submit"
+                                [disabled]="f.invalid || fc.invalid" (click)="addUser()"></button>
 
-                    <button *ngIf="user.role==role[0]" style="display: block;margin: 0 auto" pButton label="Submit"
-                            [disabled]="f.invalid || fc.invalid" (click)="addUser()"></button>
 
+                        <button *ngIf="user.role==role[1]" style="display: block;margin: 0 auto" pButton label="Submit"
+                                [disabled]="f.invalid" (click)="addUser()"></button>
+                    </div>
                 </form>
-                <button *ngIf="user.role==role[1]" style="display: block;margin: 0 auto" pButton label="Submit"
-                        [disabled]="f.invalid" (click)="addUser()"></button>
+
             </div>
         </div>
     </div>
+
 
 
 </div>

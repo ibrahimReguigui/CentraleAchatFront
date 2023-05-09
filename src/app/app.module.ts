@@ -146,9 +146,13 @@ import { RegistrationComponent } from './view/registration/registration.componen
 import { ProfileComponent } from './view/user/user-profile/profile.component';
 import { CompanyProfileComponent } from './view/company-profile/company-profile.component';
 import { UpdateProfileComponent } from './view/user/update-profile/update-profile.component';
+import { ProfileSecurityComponent } from './view/user/profile-security/profile-security.component';
+import { GetAllUserComponent } from './view/user/get-all-user/get-all-user.component';
+import { RecaptchaModule } from 'ng-recaptcha';
 
 @NgModule({
     imports: [
+        RecaptchaModule,
         BrowserModule,
         FormsModule,
         AppRoutingModule,
@@ -282,7 +286,9 @@ import { UpdateProfileComponent } from './view/user/update-profile/update-profil
         RegistrationComponent,
         ProfileComponent,
         CompanyProfileComponent,
-        UpdateProfileComponent
+        UpdateProfileComponent,
+        ProfileSecurityComponent,
+        GetAllUserComponent
     ],
     providers: [
         {

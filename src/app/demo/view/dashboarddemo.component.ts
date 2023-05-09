@@ -7,6 +7,7 @@ import { AppMainComponent } from '../../app.main.component';
 import {AppConfig} from '../domain/appconfig';
 import {ConfigService} from '../service/app.config.service';
 import {Subscription} from 'rxjs';
+import {UserServiceService} from "../../service/user/user-service.service";
 
 @Component({
     templateUrl: './dashboard.component.html',
@@ -50,7 +51,7 @@ export class DashboardDemoComponent implements OnInit {
 
     subscription: Subscription;
 
-    constructor(private productService: ProductService, private breadcrumbService: AppBreadcrumbService, private appMain: AppMainComponent, public configService: ConfigService) {
+    constructor(private userService: UserServiceService,private productService: ProductService, private breadcrumbService: AppBreadcrumbService, private appMain: AppMainComponent, public configService: ConfigService) {
         this.breadcrumbService.setItems([
             { label: 'Favorites' },
             { label: 'Dashboard' }
@@ -64,6 +65,24 @@ export class DashboardDemoComponent implements OnInit {
     }
 
     ngOnInit() {
+
+        this.userService.getProfile().subscribe(
+            user => {
+                console.log("i m here"+user.sub);
+                this.userService.getLoginErrorCount(user.sub).subscribe(
+                    result=>{
+                        console.log(result);
+                        if(result>3){
+                            this.userService.deactivateActivateAccount(user.sub).subscribe(
+                                then=>{
+                                    this.userService.logout();
+                                }
+                            );
+                        }
+
+                    }
+                )}
+        );
         this.productService.getProducts().then(data => this.products = data);
         this.productService.getProducts().then(data => this.productsThisWeek = data);
         this.productService.getProductsMixed().then(data => this.productsLastWeek = data);

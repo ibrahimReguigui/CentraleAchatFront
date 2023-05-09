@@ -1,7 +1,7 @@
 import {Company} from "./company";
 
 export class User {
-    id!:number;
+    id!:string;
     firstName!:String;
     email!:String;
     lastName!:String;
@@ -12,4 +12,5 @@ export class User {
     companyDto!:Company
     adress!:String
     image!:String
+    idCompany!:any
 }

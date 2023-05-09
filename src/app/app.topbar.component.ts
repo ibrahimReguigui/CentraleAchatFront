@@ -209,6 +209,12 @@ import {Router} from "@angular/router";
                                     </div>
                                 </li>
                                 <li role="menuitem">
+                                    <a href="#" (click)="clearEvent()">
+                                        <i class="pi pi-power-off"></i>
+                                        <h6>Clear Event</h6>
+                                    </a>
+                                </li>
+                                <li role="menuitem">
                                     <a href="#" (click)="logout()">
                                         <i class="pi pi-power-off"></i>
                                         <h6>Logout</h6>
@@ -238,6 +244,9 @@ export class AppTopBarComponent {
             })
     }
     logout() {
-        this.keycloakService.logout('http://localhost:4200/#/login')
+        this.keycloakService.logout('http://localhost:4200/#/profile')
+    }
+    clearEvent(){
+        this.userService.clearEvent().subscribe();
     }
 }

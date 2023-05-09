@@ -66,12 +66,17 @@ export class RegistrationComponent {
     user: User = new User();
     company:Company=new Company();
     uploadedFiles: any[] = [];
+    captcha: string;                                // empty = not yet proven to be a human, anything else = human
+    email: string;
 
     constructor(private userService: UserServiceService,private messageService: MessageService, private breadcrumbService: AppBreadcrumbService) {
         this.breadcrumbService.setItems([
             {label: 'UI Kit'},
             {label: 'Input'}
-        ]);
+
+    ]);
+        this.captcha = '';
+        this.email = 'Secret@email.com';
     }
 
     addUser() {
@@ -95,5 +100,11 @@ export class RegistrationComponent {
         console.log(this.uploadedFiles)
         this.messageService.add({severity: 'info', summary: 'Success', detail: 'File Uploaded'});
     }
+
+    resolved(captchaResponse: string) {
+        this.captcha = captchaResponse;
+        console.log('resolved captcha with response: ' + this.captcha);
+    }
+
 }
 

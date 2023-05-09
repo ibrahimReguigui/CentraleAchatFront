@@ -35,6 +35,8 @@ import {ProfileComponent} from "./view/user/user-profile/profile.component";
 import {AuthGuard} from "./service/security/authGuard";
 import {CompanyProfileComponent} from "./view/company-profile/company-profile.component";
 import {UpdateProfileComponent} from "./view/user/update-profile/update-profile.component";
+import {ProfileSecurityComponent} from "./view/user/profile-security/profile-security.component";
+import {GetAllUserComponent} from "./view/user/get-all-user/get-all-user.component";
 
 //,canActivate:[AuthGuard], data:{roles:['CLIENT']
 @NgModule({
@@ -73,6 +75,8 @@ import {UpdateProfileComponent} from "./view/user/update-profile/update-profile.
                     {path: 'profile', component: ProfileComponent,canActivate:[AuthGuard]},
                     {path: 'company', component: CompanyProfileComponent,canActivate:[AuthGuard]},
                     {path: 'updateProfile', component: UpdateProfileComponent,canActivate:[AuthGuard]},
+                    {path: 'security', component: ProfileSecurityComponent,canActivate:[AuthGuard]},
+                    {path: 'getAllUsers', component: GetAllUserComponent,canActivate:[AuthGuard]},
 
                 ]
             },
