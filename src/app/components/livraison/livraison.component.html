@@ -1,0 +1,176 @@
+<!-- 
+
+<div class="container-fluid">
+  <div class="row mb-3">
+    <div class="col-12 col-md-6 mb-3 mb-md-0">
+      <h2>Manage Livraisons</h2>
+    </div>
+    <div class="col-12 col-md-6">
+      <div class="row">
+        <div class="col-12 col-md-6 mb-3 mb-md-0">
+          <input type="text" class="form-control" placeholder="Search by code" [(ngModel)]="selectedCode"
+            (keyup.enter)="fetchLivraisonByCode()" />
+
+          <button class="btn btn-primary" [routerLink]="['/livraison/create']">Add Livraison</button>
+        </div>
+      </div>
+    </div>
+  </div>
+-->
+  <div class="col-12 col-md-6 mb-3 mb-md-0">
+    <div *ngIf="successMessage" class="alert alert-success mt-3">{{ successMessage }}</div>
+
+    <p-table #dt [value]="livraisons" [columns]="cols" responsiveLayout="scroll" [rows]="10"
+      [globalFilterFields]="['idLivraison', 'code', 'statusLivraison', 'Description', 'dateLivraisonPrevue', 'dateLivraison', 'idLivreur', 'createdAt']"
+      [paginator]="true" [rowsPerPageOptions]="[10,20,30]" [showCurrentPageReport]="true"
+      currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [(selection)]="selectedLivraison"
+      selectionMode="single" [rowHover]="true" dataKey="idLivraison">
+
+      <ng-template pTemplate="caption">
+        <div class="flex flex-column md:flex-row md:justify-content-between md:align-items-center">
+          <h5 class="m-0">Manage Livraisons</h5>
+          <span class="w-full sm:w-auto">
+            <i class="pi pi-search"></i>
+            <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')"
+              placeholder="Search..." class="w-full sm:w-auto" />
+          </span>
+        </div>
+      </ng-template>
+
+      <ng-template pTemplate="header">
+        <tr>
+          <th style="width: 3rem">
+            <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+          </th>
+          <th pSortableColumn="idLivraison">idLivraison <p-sortIcon field="idLivraison"></p-sortIcon></th>
+          <th pSortableColumn="code">Code <p-sortIcon field="code"></p-sortIcon></th>
+          <th pSortableColumn="statusLivraison">Status <p-sortIcon field="statusLivraison"></p-sortIcon></th>
+          <th pSortableColumn="description">Description <p-sortIcon field="Description"></p-sortIcon></th>
+          <th pSortableColumn="dateLivraisonPrevue">Date Livraison Prevue <p-sortIcon
+              field="dateLivraisonPrevue"></p-sortIcon></th>
+          <th pSortableColumn="dateLivraison">Date Livraison <p-sortIcon field="dateLivraison"></p-sortIcon></th>
+          <th pSortableColumn="idLivreur">idLivreur <p-sortIcon field="idLivreur"></p-sortIcon></th>
+          <th pSortableColumn="createdAt">Created At <p-sortIcon field="createdAt"></p-sortIcon></th>
+          <th>Send to Telegram</th> 
+        </tr>
+      </ng-template>
+
+      <ng-template pTemplate="body" let-livraison>
+        <tr>
+          <td>
+            <p-tableCheckbox [value]="livraison"></p-tableCheckbox>
+          </td>
+          <td>
+            {{livraison.idLivraison}}
+          </td>
+          <td>
+            {{livraison.code}}
+          </td>
+          <td>
+            <span [ngClass]="{
+          'order-badge': true,
+          'order-pending': livraison.statusLivraison === 'EnCours',
+          'order-delivered': livraison.statusLivraison === 'Livre',
+          'order-cancelled': livraison.statusLivraison === 'Cancelled'
+        }">
+              {{livraison.statusLivraison}}
+            </span>
+          </td>
+          <td>
+            {{livraison.description}}
+          </td>
+          <td>
+            {{livraison.dateLivraisonPrevue}}
+          </td>
+          <td>
+            {{livraison.dateLivraison}}
+          </td>
+          <td>
+            {{livraison.idLivreur}}
+          </td>
+          <td>
+            {{livraison.createdAt}}
+          </td>
+          <td>
+            <button class="btn-send-to-telegram" (click)="sendToTelegram(livraison)">Send to Telegram</button>
+          </td>          
+        </tr>
+      </ng-template>
+    </p-table>
+
+
+  </div>
+
+
+  <div class="col-12 col-md-6 mb-3 mb-md-0">
+    <p-table #dt [value]="users" [columns]="colss" responsiveLayout="scroll" [rows]="10"
+      [globalFilterFields]="['id', 'firstName', 'lastName', 'email', 'role', 'phoneNumber', 'statusLivreur', 'gouvernorat']"
+      [paginator]="true" [rowsPerPageOptions]="[10,20,30]" [showCurrentPageReport]="true"
+      currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [(selection)]="selectedUser"
+      selectionMode="single" [rowHover]="true" dataKey="id">
+  
+      <ng-template pTemplate="caption">
+        <div class="flex flex-column md:flex-row md:justify-content-between md:align-items-center">
+          <h5 class="m-0">Manage Livreurs </h5>
+         
+        </div>
+      </ng-template>
+  
+      <ng-template pTemplate="header">
+        <tr>
+          <th style="width: 3rem">
+            <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+          </th>
+          <th pSortableColumn="id">ID <p-sortIcon field="id"></p-sortIcon></th>
+          <th pSortableColumn="firstName">First Name <p-sortIcon field="firstName"></p-sortIcon></th>
+          <th pSortableColumn="lastName">Last Name <p-sortIcon field="lastName"></p-sortIcon></th>
+          <th pSortableColumn="email">Email <p-sortIcon field="email"></p-sortIcon></th>
+          <th pSortableColumn="role">Role <p-sortIcon field="role"></p-sortIcon></th>
+          <th pSortableColumn="phoneNumber">Phone Number <p-sortIcon field="phoneNumber"></p-sortIcon></th>
+          <th pSortableColumn="statusLivreur">Status Livreur <p-sortIcon field="statusLivreur"></p-sortIcon></th>
+          <th pSortableColumn="gouvernorat">Gouvernorat <p-sortIcon field="gouvernorat"></p-sortIcon></th>
+        </tr>
+      </ng-template>
+  
+      <ng-template pTemplate="body" let-user>
+        <tr>
+          <td>
+            <p-tableCheckbox [value]="user"></p-tableCheckbox>
+          </td>
+          <td>
+            {{user.id}}
+          </td>
+          <td>
+            {{user.firstName}}
+          </td>
+          <td>
+            {{user.lastName}}
+          </td>
+          <td>
+            {{user.email}}
+          </td>
+          <td>
+            {{user.role}}
+          </td>
+          <td>
+            {{user.phoneNumber}}
+          </td>
+          <td>
+            <span [ngClass]="{
+              'order-badge': true,
+              'order-delivered': user.statusLivreur === 'Actif',
+              'order-cancelled': user.statusLivreur === 'Occupe'
+            }">
+            {{user.statusLivreur}}                </span>
+          
+          </td>
+          <td>
+            {{user.gouvernorat}}
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+  
+
+

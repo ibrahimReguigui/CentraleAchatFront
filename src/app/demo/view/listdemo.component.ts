@@ -33,23 +33,26 @@ export class ListDemoComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.productService.getAllProducts().subscribe(data => this.products = data);
-
+        this.productService.getProducts().then(data => this.products = data);
 
         this.sourceCities = [
-            { field: 'name', header: 'name' },
-            { field: 'description', header: 'description' },
-            { field: 'quantity', header: 'quantity' },
-            { field: 'unitPriceHT', header: 'unitPriceHT' },
-        ];
-
+            {name: 'San Francisco', code: 'SF'},
+            {name: 'London', code: 'LDN'},
+            {name: 'Paris', code: 'PRS'},
+            {name: 'Istanbul', code: 'IST'},
+            {name: 'Berlin', code: 'BRL'},
+            {name: 'Barcelona', code: 'BRC'},
+            {name: 'Rome', code: 'RM'}];
         this.targetCities = [];
 
         this.orderCities = [
-            { field: 'name', header: 'name' },
-            { field: 'description', header: 'description' },
-            { field: 'quantity', header: 'quantity' },
-            { field: 'unitPriceHT', header: 'unitPriceHT' },];
+            {name: 'San Francisco', code: 'SF'},
+            {name: 'London', code: 'LDN'},
+            {name: 'Paris', code: 'PRS'},
+            {name: 'Istanbul', code: 'IST'},
+            {name: 'Berlin', code: 'BRL'},
+            {name: 'Barcelona', code: 'BRC'},
+            {name: 'Rome', code: 'RM'}];
 
         this.sortOptions = [
             {label: 'Price High to Low', value: '!price'},

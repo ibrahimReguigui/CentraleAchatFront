@@ -1,0 +1,158 @@
+/* Center align the heading */
+h2 {
+    text-align: left;
+  }
+  
+  /* Add margin to the top of the page */
+  .container-fluid {
+    margin-top: 30px;
+  }
+  
+  /* Add padding to the input elements */
+  .p-inputtext {
+    padding: 0;
+
+
+  }
+
+
+  .chart-container {
+    display: grid;
+    place-items: center;
+  }
+  
+  .small {
+    width: 500px;
+    height: 300px;
+  }
+  
+  
+  .product-badge {
+    border-radius: var(--border-radius);
+    padding: .25em .5rem;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: .3px;
+
+    &.status-instock {
+        background: #C8E6C9;
+        color: #256029;
+    }
+
+    &.status-outofstock {
+        background: #FFCDD2;
+        color: #C63737;
+    }
+
+    &.status-lowstock {
+        background: #FEEDAF;
+        color: #8A5340;
+    }
+}
+
+.customer-badge {
+    border-radius: var(--border-radius);
+    padding: .25em .5rem;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: .3px;
+
+    &.status-qualified {
+        background: #C8E6C9;
+        color: #256029;
+    }
+
+    &.status-unqualified {
+        background: #FFCDD2;
+        color: #C63737;
+    }
+
+    &.status-negotiation {
+        background: #FEEDAF;
+        color: #8A5340;
+    }
+
+    &.status-new {
+        background: #B3E5FC;
+        color: #23547B;
+    }
+
+    &.status-renewal {
+        background: #ECCFFF;
+        color: #694382;
+    }
+
+    &.status-proposal {
+        background: #FFD8B2;
+        color: #805B36;
+    }
+}
+
+.order-badge {
+    border-radius: var(--border-radius);
+    padding: .25em .5rem;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: .3px;
+
+    &.order-delivered {
+        background: #C8E6C9;
+        color: #256029;
+    }
+
+    &.order-cancelled {
+        background: #FFCDD2;
+        color: #C63737;
+    }
+
+    &.order-pending {
+        background: #FEEDAF;
+        color: #8A5340;
+    }
+
+    &.order-returned {
+        background: #ECCFFF;
+        color: #694382;
+    }
+}
+  
+
+.order-pending {
+    background: #FEEDAF;
+    color: #8A5340;
+  }
+  
+  .order-delivered {
+    background: #C8E6C9;
+    color: #256029;
+  }
+  
+  .order-cancelled {
+    background: #FFCDD2;
+    color: #C63737;
+  }
+  
+  .btn-send-to-telegram {
+    background-color: #0088cc;
+    border: none;
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 8px 16px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .btn-send-to-telegram:hover {
+    background-color: #006fa1;
+  }
+  
+  .btn-send-to-telegram:active {
+    background-color: #005377;
+  }
+
+  

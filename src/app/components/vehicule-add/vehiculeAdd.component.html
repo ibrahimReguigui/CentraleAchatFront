@@ -1,0 +1,212 @@
+<div class="grid">
+    <div class="col-12">
+        <div class="card px-6 py-6">
+            <p-toast></p-toast>
+            <p-toolbar styleClass="mb-4">
+                <ng-template pTemplate="left">
+                    <div class="my-2">
+                        <button pButton pRipple label="New" icon="pi pi-plus" class="p-button-success mr-2" (click)="openNew()"></button>
+                        <button pButton pRipple label="Delete" icon="pi pi-trash" class="p-button-danger" (click)="deleteSelectedVehicules()" [disabled]="!selectedVehicules || !selectedVehicules.length"></button>
+                    </div>
+                </ng-template>
+
+              
+            </p-toolbar>
+
+            <p-table #dt [value]="vehicules" [columns]="cols" responsiveLayout="scroll" [rows]="10" [globalFilterFields]="['model','registrationNumber','location','statusVehicule']" [paginator]="true" [rowsPerPageOptions]="[10,20,30]" [showCurrentPageReport]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [(selection)]="selectedVehicules" selectionMode="multiple" [rowHover]="true" dataKey="idVehicule">
+                <ng-template pTemplate="caption">
+                    <div class="flex flex-column md:flex-row md:justify-content-between md:align-items-center">
+                        <h5 class="m-0">Manage Vehicules</h5>
+                        <span class="block mt-2 md:mt-0 p-input-icon-left">
+                            <i class="pi pi-search"></i>
+                            <input pInputText type="text" (input)="onGlobalFilter(dt, $event)" placeholder="Search..."  class="w-full sm:w-auto"/>
+                        </span>
+                    </div>
+                </ng-template>
+
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th style="width: 3rem">
+                            <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                        </th>
+                        <th pSortableColumn="id">id <p-sortIcon field="id"></p-sortIcon></th>
+                        <th pSortableColumn="name">Model <p-sortIcon field="name"></p-sortIcon></th>
+                        <th pSortableColumn="price"> Registration Number <p-sortIcon field="price"></p-sortIcon></th>
+                        <th pSortableColumn="category">Type <p-sortIcon field="category"></p-sortIcon></th>
+                        <th pSortableColumn="rating">Color <p-sortIcon field="rating"></p-sortIcon></th>
+                        <th pSortableColumn="rating">id-Livreur <p-sortIcon field="rating"></p-sortIcon></th>
+                        <th pSortableColumn="rating">Added Date<p-sortIcon field="rating"></p-sortIcon></th>
+                        <th pSortableColumn="rating">Location<p-sortIcon field="rating"></p-sortIcon></th>
+                        <th pSortableColumn="inventoryStatus">Status <p-sortIcon field="inventoryStatus"></p-sortIcon></th>
+                        <th pSortableColumn="inventoryStatus"> </th>
+
+                        <th></th>
+                    </tr>
+                </ng-template>
+
+                <ng-template pTemplate="body" let-vehicule>
+                    <tr >
+                        <td>
+                            <p-tableCheckbox [value]="vehicule"></p-tableCheckbox>
+                        </td>
+
+                        <td style="width:14%; min-width:10rem;"><span class="p-column-title">id</span>
+                            {{vehicule.idVehicule}}
+                        </td>
+                        <td style="width:14%; min-width:10rem;">
+                            <span class="p-column-title">Model</span>
+                            {{ vehicule.model }}
+                        </td>
+                        <td style="width:14%; min-width:10rem;"><span class="p-column-title">Image</span>
+                            {{ vehicule.registrationNumber }}
+                        </td>
+                        <td style="width:14%; min-width:8rem;">
+                            <span class="p-column-title">type</span>
+                            {{ vehicule.type}}
+                        </td>
+                        <td style="width:14%; min-width:10rem;">
+                            <span class="p-column-title">color</span>
+                            {{ vehicule.color}}
+                        </td>
+                        <td style="width:14%; min-width:10rem;">
+                            <span class="p-column-title">idlivreur</span>
+                            {{ vehicule.idLivreur}} 
+                        </td>
+                        <td style="width:14%; min-width:10rem;">
+                            <span class="p-column-title">created</span>
+                            {{ vehicule.createdAt}}
+                        </td>
+                        <td style="width:14%; min-width:10rem;">
+                            <span class="p-column-title">Category</span>
+                            {{ vehicule.location}}
+                        </td>
+                        <td style="width:14%; min-width:10rem;">
+                            <span class="p-column-title">Category</span>
+                            {{ vehicule.statusVehicule}}
+                        </td>
+                
+                        <td>
+                            <div class="flex">
+                                <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2" (click)="editVehicule(vehicule)"></button>
+                                <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" (click)="deleteVehicule(vehicule)"></button>
+                            </div>
+                        </td>
+                    </tr>
+                </ng-template>
+                
+            </p-table>
+        </div>
+
+      
+
+
+
+
+
+
+        
+        <p-dialog [(visible)]="vehiculeDialog" [style]="{width: '450px'}" header="Vehicule Details" [modal]="true" class="p-fluid">
+            <ng-template pTemplate="content">
+                <div class="field">
+                    <label for="model">Model</label>
+                    <input type="text" pInputText id="model" [(ngModel)]="vehicule.model" required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !vehicule.model}"/>
+                    <small class="ng-dirty ng-invalid" *ngIf="submitted && !vehicule.model">Model is required.</small>
+                </div>
+        
+                <div class="field">
+                    <label for="registrationNumber">Registration Number</label>
+                    <input type="text" pInputText id="registrationNumber" [(ngModel)]="vehicule.registrationNumber" required [ngClass]="{'ng-invalid ng-dirty' : submitted && !vehicule.registrationNumber}"/>
+                    <small class="ng-dirty ng-invalid" *ngIf="submitted && !vehicule.registrationNumber">Registration Number is required.</small>
+                </div>
+        
+                <div class="field">
+                    <label for="type">Type</label>
+                    <input type="text" pInputText id="type" [(ngModel)]="vehicule.type" required [ngClass]="{'ng-invalid ng-dirty' : submitted && !vehicule.type}"/>
+                    <small class="ng-dirty ng-invalid" *ngIf="submitted && !vehicule.type">Type is required.</small>
+                </div>
+        
+                <div class="field">
+                    <label for="color">Color</label>
+                    <input type="text" pInputText id="color" [(ngModel)]="vehicule.color" required [ngClass]="{'ng-invalid ng-dirty' : submitted && !vehicule.color}"/>
+                    <small class="ng-dirty ng-invalid" *ngIf="submitted && !vehicule.color">Color is required.</small>
+                </div>
+        
+                <div class="field">
+                    <label for="idLivreur">Id Livreur</label>
+                    <input type="text" pInputText id="idLivreur" [(ngModel)]="vehicule.idLivreur" required [ngClass]="{'ng-invalid ng-dirty' : submitted && !vehicule.idLivreur}"/>
+                    <small class="ng-dirty ng-invalid" *ngIf="submitted && !vehicule.idLivreur">Id Livreur is required.</small>
+                </div>
+
+
+
+                <div class="field">
+                    <label for="status">Location</label>
+                    <p-dropdown [(ngModel)]="vehicule.location" inputId="inventoryStatus" optionValue="label" [options]="statuses" placeholder="Select">
+                        <ng-template pTemplate="selectedItem">
+                            <span *ngIf="vehicule && vehicule.location" [class]="'vehicule-badge status-' + vehicule.location.toLowerCase()">{{vehicule.location}}</span>
+                        </ng-template>
+                        <ng-template let-option pTemplate="item">
+                            <span [class]="'vehicule-badge status-' + option.value">{{option.label}}</span>
+                        </ng-template>
+                    </p-dropdown>
+                </div>
+
+                <div class="field">
+                    <label class="mb-3">Status Vehicule</label>
+                    <div class="formgrid grid">
+                        <div class="field-radiobutton col-6">
+                            <p-radioButton id="category1" name="category" value="Disponible" [(ngModel)]="vehicule.statusVehicule"></p-radioButton>
+                            <label for="category1">Disponible</label>
+                        </div>
+                        <div class="field-radiobutton col-6">
+                            <p-radioButton id="category2" name="category" value="Occupe" [(ngModel)]="vehicule.statusVehicule"></p-radioButton>
+                            <label for="category2">Occupe</label>
+                        </div>
+                     
+                    </div>
+                </div>
+
+            </ng-template>
+
+            <ng-template pTemplate="footer">
+                <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
+                <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)="saveVehicule()"></button>
+            </ng-template>
+        </p-dialog>
+
+
+
+
+
+
+
+        <p-dialog [(visible)]="deleteVehiculeDialog" header="Confirm" [modal]="true" [style]="{width:'450px'}">
+            <div class="flex align-items-center justify-content-center">
+                <i class="pi pi-exclamation-triangle mr-3" style="font-size: 2rem"></i>
+                <span *ngIf="vehicule">Are you sure you want to delete <b>{{vehicule.registrationNumber}}</b>?</span>
+            </div>
+
+            <ng-template pTemplate="footer">
+                <button pButton pRipple icon="pi pi-times" class="p-button-text" label="No" (click)="deleteVehiculeDialog = false"></button>
+                <button pButton pRipple icon="pi pi-check" class="p-button-text" label="Yes" (click)="confirmDelete()"></button>
+            </ng-template>
+        </p-dialog>
+
+        <p-dialog [(visible)]="deleteVehiculesDialog" header="Confirm" [modal]="true" [style]="{width:'450px'}">
+            <div class="flex align-items-center justify-content-center">
+                <i class="pi pi-exclamation-triangle mr-3" style="font-size: 2rem"></i>
+                <span>Are you sure you want to delete selected vehicules?</span>
+            </div>
+            <ng-template pTemplate="footer">
+                <button pButton pRipple icon="pi pi-times" class="p-button-text" label="No" (click)="deleteVehiculesDialog = false"></button>
+                <button pButton pRipple icon="pi pi-check" class="p-button-text" label="Yes" (click)="confirmDeleteSelected()"></button>
+            </ng-template>
+
+            <div class="flex align-items-center justify-content-center">
+                <i class="pi pi-exclamation-triangle mr-3" style="font-size: 2rem" *ngIf="!loading"></i>
+                <p-progressSpinner *ngIf="loading"></p-progressSpinner>
+                <span *ngIf="!loading">...</span>
+              </div>
+        </p-dialog>
+    </div>
+</div>

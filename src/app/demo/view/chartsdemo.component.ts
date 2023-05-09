@@ -3,7 +3,6 @@ import {AppBreadcrumbService} from '../../app.breadcrumb.service';
 import {Subscription} from 'rxjs';
 import {AppConfig} from '../domain/appconfig';
 import {ConfigService} from '../service/app.config.service';
-import {UserServiceService} from "../../service/user/user-service.service";
 
 @Component({
     templateUrl: './chartsdemo.component.html'
@@ -34,7 +33,7 @@ export class ChartsDemoComponent implements OnInit, OnDestroy {
 
     subscription: Subscription;
 
-    constructor(private userService: UserServiceService,private breadcrumbService: AppBreadcrumbService, public configService: ConfigService) {
+    constructor(private breadcrumbService: AppBreadcrumbService, public configService: ConfigService) {
         this.breadcrumbService.setItems([
             {label: 'UI Kit'},
             {label: 'Charts'}
@@ -43,7 +42,6 @@ export class ChartsDemoComponent implements OnInit, OnDestroy {
 
 
     ngOnInit() {
-
         this.config = this.configService.config;
         this.subscription = this.configService.configUpdate$.subscribe(config => {
             this.config = config;

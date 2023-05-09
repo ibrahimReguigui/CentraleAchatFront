@@ -1,18 +1,32 @@
-import {Categorie} from "./categorie";
-
 export interface Product {
-    idProduct?: number;
+    id?: string;
+    code?: string;
     name?: string;
     description?: string;
-     categorie?: Categorie;
-    dateEndDiscount?: Date;
-    // departement?: Departement;
-    discount?: number;
-    firstQuantity?: number;
-    image?: string;
-    lowQuantity?: number;
+    price?: number;
     quantity?: number;
-    // unit?: unit;
-    unitPriceHT?: number;
-
+    inventoryStatus?: string;
+    category?: string;
+    image?: string;
+    rating?: number;
 }
+
+
+
+    // private Long idVehicule;
+    // private String model;
+    // private String registrationNumber;
+    // private String image;
+    // private String type;
+    // private String color;
+    // @NotEmpty(message = "idSupplier is mandatory")
+    // private String idSupplier;
+    // @Enumerated(EnumType.STRING)
+    // private StatusVehicule statusVehicule =  StatusVehicule.Disponible;
+    // @Enumerated(EnumType.STRING)
+    // private Location location ;
+    // private String idLivreur;
+    // private LocalDateTime createdAt;
+    // private String createdBy;
+    // private LocalDateTime updatedAt;
+    // private String updatedBy;

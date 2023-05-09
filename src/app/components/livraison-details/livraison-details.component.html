@@ -1,0 +1,35 @@
+<div class="container">
+    <h3>Track Livraison</h3>
+    <form (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="code">Code Livraison:</label>
+        <input
+          type="text"
+          class="form-control"
+          id="code"
+          [(ngModel)]="code"
+          name="code"
+          required
+        />
+      </div>
+      <button type="submit" class="btn btn-primary">Track Livraison</button>
+    </form>
+  
+    <div *ngIf="customEvents" class="timeline-container">
+      <h4>Timeline</h4>
+  
+      <p-timeline [value]="customEvents" align="alternate" styleClass="customized-timeline">
+        <ng-template pTemplate="marker" let-event>
+          <span class="custom-marker shadow-2" [style.backgroundColor]="event.color">
+            <i [ngClass]="event.icon"></i>
+          </span>
+        </ng-template>
+        <ng-template pTemplate="content" let-event>
+          <p-card [header]="event.status" [subheader]="event.date | date: 'medium'">
+            <p>{{ event.description }}</p>
+          </p-card>
+        </ng-template>
+      </p-timeline>
+    </div>
+  </div>
+  

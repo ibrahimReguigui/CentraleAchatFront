@@ -1,4 +1,5 @@
-import {NgModule, CUSTOM_ELEMENTS_SCHEMA, APP_INITIALIZER} from '@angular/core';
+import {NgModule, CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
+import {FormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import {BrowserModule} from '@angular/platform-browser';
 import {HashLocationStrategy, LocationStrategy} from '@angular/common';
@@ -139,33 +140,17 @@ import {ConfigService} from './demo/service/app.config.service';
 
 import {MenuService} from './app.menu.service';
 import {AppBreadcrumbService} from './app.breadcrumb.service';
-import {KeycloakAngularModule, KeycloakService} from "keycloak-angular";
-import {initializeKeycloak} from "./service/security/initializeKeycloak";
-import { RegistrationComponent } from './view/registration/registration.component';
-import { ProfileComponent } from './view/user/user-profile/profile.component';
-import { CompanyProfileComponent } from './view/company-profile/company-profile.component';
-import { UpdateProfileComponent } from './view/user/update-profile/update-profile.component';
-import { ProfileSecurityComponent } from './view/user/profile-security/profile-security.component';
-import { GetAllUserComponent } from './view/user/get-all-user/get-all-user.component';
-import { RecaptchaModule } from 'ng-recaptcha';
-import { ProductComponent } from './product/product.component';
-import { CategorieComponent } from './demo/domain/categorie/categorie.component';
-import { ChartComponent } from './demo/domain/chart/chart.component';
-import { ReviewComponent } from './view/review/review.component';
-import { TestComponent } from './view/test/test.component';
-import { UpdateReviewComponent } from './view/update-review/update-review.component';
-import { GetReviewComponent } from './view/get-review/get-review.component';
-import { AddOfferComponent } from './view/add-offer/add-offer.component';
-import { BestProductDashboardComponent } from './view/best-product-dashboard/best-product-dashboard.component';
-import { GetOfferComponent } from './view/get-offer/get-offer.component';
-import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import { MessageService } from 'primeng/api';
+import { VehiculeAddComponent } from './components/vehicule-add/vehiculeAdd.component';
+import { LivraisonComponent } from './components/livraison/livraison.component';
+import { VehiculeStatisticsComponent } from './components/vehicule-statistics/vehicule-statistics.component';
+import { LivraisonDetailsComponent } from './components/livraison-details/livraison-details.component';
+
 
 @NgModule({
     imports: [
-        RecaptchaModule,
         BrowserModule,
         FormsModule,
-        ReactiveFormsModule,
         AppRoutingModule,
         HttpClientModule,
         BrowserAnimationsModule,
@@ -249,10 +234,7 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
         TreeModule,
         TreeTableModule,
         VirtualScrollerModule,
-        AppCodeModule,
-        ReactiveFormsModule,
-        FormsModule,
-        KeycloakAngularModule
+        AppCodeModule
     ],
     declarations: [
         AppComponent,
@@ -296,29 +278,19 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
         AppAccessdeniedComponent,
         BlocksComponent,
         BlockViewer,
-        RegistrationComponent,
-        ProfileComponent,
-        CompanyProfileComponent,
-        UpdateProfileComponent,
-        ProfileSecurityComponent,
-        GetAllUserComponent,
-        ProductComponent,
-        CategorieComponent,
-        ChartComponent,
-        ReviewComponent, TestComponent, UpdateReviewComponent, GetReviewComponent, AddOfferComponent, BestProductDashboardComponent, GetOfferComponent
+        VehiculeAddComponent,
+        LivraisonComponent,
+        VehiculeStatisticsComponent,
+        LivraisonDetailsComponent
     ],
     providers: [
-        {
-            provide: APP_INITIALIZER,
-            useFactory: initializeKeycloak,
-            multi: true,
-            deps: [KeycloakService],
-        },
+        
         {provide: LocationStrategy, useClass: HashLocationStrategy},
+        MessageService,
         CountryService, CustomerService, EventService, IconService, NodeService,
         PhotoService, ProductService, MenuService, AppBreadcrumbService, ConfigService
     ],
-    bootstrap: [AppComponent] //ici on ecrit le composant de démarrage
+    bootstrap: [AppComponent]
 })
 export class AppModule {
 }
