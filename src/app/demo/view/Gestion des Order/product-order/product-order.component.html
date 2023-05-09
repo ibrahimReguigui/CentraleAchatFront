@@ -1,0 +1,126 @@
+<div><div class="w-full lg:w-1/4 ml-3">
+    <div class="card m-3 border-1 surface-border">
+        <div class="flex align-items-center justify-content-between">
+            <div class="text-2xl font-bold">Carte</div>
+            <button pButton type="button" class="p-button-danger" label="Remove All" (click)="removeAllOrderLines()" *ngIf="orderLines.length > 0"></button>
+        </div>
+        <div>
+
+        <div *ngIf="orderLines.length === 0" class="text-center my-3">La carte est vide</div>
+        <div *ngFor="let orderLine of orderLines ">
+            <div class="flex align-items-center justify-content-between my-3">
+                <div>{{orderLine.idProduct}}</div>
+                <div>{{orderLine.quantity}}</div>
+                <div>
+                    <button pButton type="button" icon="pi pi-times" class="p-button-danger" (click)="removeOrderLine(orderLine)"></button>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="orderLines.length > 0">
+            <hr>
+            <div class="my-3">
+                <div class="font-semibold mb-1">Date limite :</div>
+                <p-calendar [(ngModel)]="deadLine" showIcon="true" showButtonBar="true" placeholder="Selectionner une date"></p-calendar>
+            </div>
+            <div class="text-center my-3">
+                <button pButton type="button" class="p-button-success" label="Send Order" (click)="submitOrder()" [disabled]="!deadLine"></button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+</div>
+
+
+
+
+
+    <p-messages></p-messages>
+
+
+
+
+
+
+
+
+
+<div class="w-full lg:w-1/4 ml-3">
+    <div class="card m-3 border-1 surface-border">
+        <h5>mY Product</h5>
+        <p-dataView #dv [value]="products" [paginator]="true" [rows]="9" filterBy="name" [sortField]="sortField" [sortOrder]="sortOrder" layout="grid">
+            <ng-template pTemplate="header">
+                <div class="grid grid-nogutter flex-column md:flex-row justify-content-between">
+                    <p-dropdown [options]="sortOptions" [(ngModel)]="sortKey" placeholder="Sort By Price" (onChange)="onSortChange($event)"></p-dropdown>
+                    <span class="p-input-icon-left mb-2 md:mb-0">
+                            <i class="pi pi-search"></i>
+                            <input type="search" pInputText placeholder="Search by Name" (input)="dv.filter($event.target.value)">
+                        </span>
+                    <p-dataViewLayoutOptions></p-dataViewLayoutOptions>
+                </div>
+            </ng-template>
+
+            <ng-template let-products pTemplate="listItem">
+                <div class="col-12">
+                    <div class="flex flex-column md:flex-row align-items-center p-3 w-full">
+                        <div class="flex-1 text-center md:text-left">
+                            <div class="font-bold text-2xl">{{products.name}}</div>
+                            <div class="mb-3">{{products.description}}</div>
+
+                        </div>
+
+
+                        <div class="flex flex-row md:flex-column justify-content-between w-full md:w-auto align-items-center md:align-items-end mt-5 md:mt-0">
+
+                            <span class="text-2xl font-semibold mb-2 align-self-center md:align-self-end">{{products.unitPriceHT}} DT</span>
+
+                            <p-button icon="pi pi-shopping-cart" (click)="addProductToList(products)" label="Add to Cart" [disabled]="products.quantity === 0" class="mb-2"></p-button>
+                            <p-inputNumber mode="decimal"  size="9" [disabled]="products.quantity === 0" [showButtons]="true" [min]="0" [max]="products.quantity" [(ngModel)]="products.selectedQuantity">
+                            </p-inputNumber>
+                        </div>
+                    </div>
+                </div>
+            </ng-template>
+
+
+            <ng-template let-products pTemplate="gridItem">
+                <div class="col-12 md:col-4">
+                    <div class="card m-3 border-1 surface-border">
+                        <div class="flex align-items-center justify-content-between">
+                            <div class="flex align-items-center">
+                                <i class="pi pi-tag mr-2"></i>
+                                <span class="font-semibold">{{products.name}}</span>
+                            </div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-2xl font-bold">{{products.name}}</div>
+                            <div class="mb-3">{{products.description}}</div>
+
+
+                        </div>
+                        <div class="flex align-items-center justify-content-between">
+                            <span class="text-2xl font-semibold">{{products.unitPriceHT}} DT</span>
+
+                            <p-inputNumber mode="decimal"  size="10" [disabled]="products.quantity === 0" [showButtons]="true" [min]="0" [max]="products.quantity" [(ngModel)]="products.selectedQuantity">
+                            </p-inputNumber>
+                            <p-button icon="pi pi-shopping-cart"  (click)="addProductToList(products)" [disabled]="products.quantity === 0" class="mb-2"></p-button>
+                        </div>
+                    </div>
+                </div>
+            </ng-template>
+        </p-dataView>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+

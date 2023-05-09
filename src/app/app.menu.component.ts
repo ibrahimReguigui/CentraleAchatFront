@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {AppComponent} from './app.component';
 
 @Component({
-    selector: 'app-menu', //THE MENU ON THE LEFT OF BACK PAGE
+    selector: 'app-menu',
     template: `
         <ul class="layout-menu">
             <li app-menuitem *ngFor="let item of model; let i = index;" [item]="item" [index]="i" [root]="true"></li>
@@ -20,39 +20,15 @@ export class AppMenuComponent implements OnInit {
             {
                 label: 'Favorites', icon: 'pi pi-fw pi-home',
                 items: [
-                    {label: 'Dashboard', icon: 'pi pi-fw pi-home', routerLink: ['/']},
-                    
+                    {label: 'Dashboard', icon: 'pi pi-fw pi-home', routerLink: ['/']}
                 ]
             },
             {
-                label: 'Account', icon: 'pi pi-fw pi-star-fill',
+                label: 'Order Management', icon: 'pi pi-fw pi-star-fill', routerLink: ['/uikit'],
                 items: [
-                    {label: 'Profile', icon: 'pi pi-fw pi-id-card', routerLink: ['/profile']},
-                    {label: 'Company', icon: 'pi pi-fw pi-prime', routerLink: ['/company']},
-                    {label: 'Security', icon: 'pi pi-fw pi-eye', routerLink: ['/security']},
-                    {label: 'Users', icon: 'pi pi-fw pi-bars', routerLink: ['/getAllUsers']},
-                ]
-            },
-            {
-                label:'Prime Blocks', icon:'pi pi-fw pi-prime', routerLink: ['/blocks'],
-                items:[
-                    {label: 'Free Blocks', icon: 'pi pi-fw pi-eye', routerLink: ['/blocks']},
-                    {label: 'All Blocks', icon: 'pi pi-fw pi-globe', url: ['https://www.primefaces.org/primeblocks-ng'], target: '_blank'},
-                ]
-            },
-            {
-                label: 'Utilities', icon: 'pi pi-fw pi-compass', routerLink: ['/utilities'],
-                items: [
-                    
-                    {label: 'addoffer', icon: 'pi pi-fw pi-clone', routerLink: ['/addoffer']},  //////////////////offre url
-                    {label: 'review', icon: 'pi pi-fw pi-clone', routerLink: ['/review']},
-                    {label: 'getreview', icon: 'pi pi-fw pi-clone', routerLink: ['/getreview']},
-                   // {label: 'updatereview', icon: 'pi pi-fw pi-clone', routerLink: ['/updatereview']},
-                    {label: 'bestProductsDashboard', icon: 'pi pi-fw pi-clone', routerLink: ['/bestProductsDashboard']},
-
-
-                    
-                    {label: 'Form Layout', icon: 'pi pi-fw pi-id-card', routerLink: ['/uikit/formlayout']},
+                    {label: 'Send Order', icon: 'pi pi-fw pi-id-card', routerLink: ['/uikit/ProductOrder']},
+                    {label: 'Order List', icon: 'pi pi-fw pi-id-card', routerLink: ['uikit/listOrder']},
+                   /* {label: 'Form Layout', icon: 'pi pi-fw pi-id-card', routerLink: ['/uikit/formlayout']},
                     {label: 'Input', icon: 'pi pi-fw pi-check-square', routerLink: ['/uikit/input']},
                     {label: 'Float Label', icon: 'pi pi-fw pi-bookmark', routerLink: ['/uikit/floatlabel']},
                     {label: 'Invalid State', icon: 'pi pi-fw pi-exclamation-circle', routerLink: ['/uikit/invalidstate']},
@@ -67,7 +43,19 @@ export class AppMenuComponent implements OnInit {
                     {label: 'Message', icon: 'pi pi-fw pi-comment', routerLink: ['/uikit/message']},
                     {label: 'File', icon: 'pi pi-fw pi-file', routerLink: ['/uikit/file']},
                     {label: 'Chart', icon: 'pi pi-fw pi-chart-bar', routerLink: ['/uikit/charts']},
-                    {label: 'Misc', icon: 'pi pi-fw pi-circle-off', routerLink: ['/uikit/misc']},
+                    {label: 'Misc', icon: 'pi pi-fw pi-circle-off', routerLink: ['/uikit/misc']}
+                */]
+            },
+            {
+                label:'Client Order', icon:'pi pi-fw pi-prime', routerLink: ['/blocks'],
+                 items:[{label: 'My Order', icon: 'pi pi-fw pi-eye', routerLink: ['/orderClient']}
+                //     {label: 'Free Blocks', icon: 'pi pi-fw pi-eye', routerLink: ['/blocks']},
+                //     {label: 'All Blocks', icon: 'pi pi-fw pi-globe', url: ['https://www.primefaces.org/primeblocks-ng'], target: '_blank'},
+                   ]
+            },
+            {
+                label: 'Utilities', icon: 'pi pi-fw pi-compass', routerLink: ['/utilities'],
+                items: [
                     {label: 'PrimeIcons', icon: 'pi pi-fw pi-prime', routerLink: ['utilities/icons']},
                     {label: 'PrimeFlex', icon: 'pi pi-fw pi-desktop', url: ['https://www.primefaces.org/primeflex/'], target: '_blank'},
                 ]
@@ -75,9 +63,7 @@ export class AppMenuComponent implements OnInit {
             {
                 label: 'Pages', icon: 'pi pi-fw pi-briefcase', routerLink: ['/pages'],
                 items: [
-                    {label: 'Product', icon: 'pi pi-fw pi-pencil', routerLink: ['/pages/crud']},
-                    {label: 'Categorie', icon: 'pi pi-fw pi-calendar-plus', routerLink: ['/categorie']},
-                    {label: 'Chart', icon: 'pi pi-fw pi-calendar-plus', routerLink: ['/chart']},
+                    {label: 'Crud', icon: 'pi pi-fw pi-pencil', routerLink: ['/pages/crud']},
                     {label: 'Calendar', icon: 'pi pi-fw pi-calendar-plus', routerLink: ['/pages/calendar']},
                     {label: 'Timeline', icon: 'pi pi-fw pi-calendar', routerLink: ['/pages/timeline']},
                     {label: 'Landing', icon: 'pi pi-fw pi-globe', url: 'assets/pages/landing.html', target: '_blank'},

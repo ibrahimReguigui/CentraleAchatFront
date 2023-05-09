@@ -1,9 +1,6 @@
 import {Component} from '@angular/core';
 import {AppComponent} from './app.component';
 import {AppMainComponent} from './app.main.component';
-import {UserServiceService} from "./service/user/user-service.service";
-import {KeycloakService} from "keycloak-angular";
-import {Router} from "@angular/router";
 
 @Component({
     selector: 'app-topbar',
@@ -157,7 +154,7 @@ import {Router} from "@angular/router";
                                     <h6 class="header-text">Settings</h6>
                                 </li>
                                 <li role="menuitem">
-                                    <a [routerLink]="['/profile']" (click)="appMain.onTopbarSubItemClick($event)">
+                                    <a href="#" (click)="appMain.onTopbarSubItemClick($event)">
                                         <i class="pi pi-user"></i>
                                         <div class="settings-item">
                                             <h6>Account Info</h6>
@@ -195,8 +192,8 @@ import {Router} from "@angular/router";
                             <a href="#" (click)="appMain.onTopbarItemClick($event,profile)">
                                 <img class="profile-image" src="assets/layout/images/avatar-profile.png" alt="demo">
                                 <div class="profile-info">
-                                    <h6>{{user.given_name +" " +user.family_name}}</h6>
-                                    <span>{{user.realm_access.roles[3]}}</span>
+                                    <h6>Peter Taylor</h6>
+                                    <span>Webmaster</span>
                                 </div>
                             </a>
 
@@ -204,18 +201,30 @@ import {Router} from "@angular/router";
                                 <li class="layout-submenu-header">
                                     <img class="profile-image" src="assets/layout/images/avatar-profile.png" alt="demo">
                                     <div class="profile-info">
-                                        <h6>{{user.given_name +" " +user.family_name}}</h6>
-                                        <span>{{user.realm_access.roles[3]}}</span>
+                                        <h6>Peter Taylor</h6>
+                                        <span>Webmaster</span>
                                     </div>
                                 </li>
                                 <li role="menuitem">
-                                    <a href="#" (click)="clearEvent()">
-                                        <i class="pi pi-power-off"></i>
-                                        <h6>Clear Event</h6>
+                                    <a href="#" (click)="appMain.onTopbarSubItemClick($event)">
+                                        <i class="pi pi-cog"></i>
+                                        <h6>Settings</h6>
                                     </a>
                                 </li>
                                 <li role="menuitem">
-                                    <a href="#" (click)="logout()">
+                                    <a href="#" (click)="appMain.onTopbarSubItemClick($event)">
+                                        <i class="pi pi-file"></i>
+                                        <h6>Terms of Usage</h6>
+                                    </a>
+                                </li>
+                                <li role="menuitem">
+                                    <a href="#" (click)="appMain.onTopbarSubItemClick($event)">
+                                        <i class="pi pi-compass"></i>
+                                        <h6>Support</h6>
+                                    </a>
+                                </li>
+                                <li role="menuitem">
+                                    <a href="#" (click)="appMain.onTopbarSubItemClick($event)">
                                         <i class="pi pi-power-off"></i>
                                         <h6>Logout</h6>
                                     </a>
@@ -234,19 +243,7 @@ import {Router} from "@angular/router";
 })
 export class AppTopBarComponent {
 
-    constructor(private router:Router,public appMain: AppMainComponent, public app: AppComponent,private userService: UserServiceService,private keycloakService: KeycloakService) {
+    constructor(public appMain: AppMainComponent, public app: AppComponent) {
     }
-    user:any;
-    ngOnInit(): void {
-        this.userService.getProfile().subscribe(
-            r=>{
-                this.user=r;
-            })
-    }
-    logout() {
-        this.keycloakService.logout('http://localhost:4200/#/profile')
-    }
-    clearEvent(){
-        this.userService.clearEvent().subscribe();
-    }
+
 }

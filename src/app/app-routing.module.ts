@@ -12,7 +12,6 @@ import {MiscDemoComponent} from './demo/view/miscdemo.component';
 import {EmptyDemoComponent} from './demo/view/emptydemo.component';
 import {ChartsDemoComponent} from './demo/view/chartsdemo.component';
 import {FileDemoComponent} from './demo/view/filedemo.component';
-
 import {DocumentationComponent} from './demo/view/documentation.component';
 import {AppMainComponent} from './app.main.component';
 import {AppNotfoundComponent} from './pages/app.notfound.component';
@@ -31,46 +30,27 @@ import {AppTimelineDemoComponent} from './pages/app.timelinedemo.component';
 import {AppInvoiceComponent} from './pages/app.invoice.component';
 import {AppHelpComponent} from './pages/app.help.component';
 import {BlocksComponent} from './blocks/blocks/blocks.component';
-
-import {RegistrationComponent} from "./view/registration/registration.component";
-import {ProfileComponent} from "./view/user/user-profile/profile.component";
-import {AuthGuard} from "./service/security/authGuard";
-import {CompanyProfileComponent} from "./view/company-profile/company-profile.component";
-import {UpdateProfileComponent} from "./view/user/update-profile/update-profile.component";
-import {ProfileSecurityComponent} from "./view/user/profile-security/profile-security.component";
-import {GetAllUserComponent} from "./view/user/get-all-user/get-all-user.component";
-import {CategorieComponent} from "./demo/domain/categorie/categorie.component";
-import {ChartComponent} from "./demo/domain/chart/chart.component";
-
-
-
-import {ReviewComponent } from './view/review/review.component';
-import { TestComponent } from './view/test/test.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { UpdateReviewComponent } from './view/update-review/update-review.component';
-import { GetReviewComponent } from './view/get-review/get-review.component';
-import { AddOfferComponent } from './view/add-offer/add-offer.component';
-import { BestProductDashboardComponent } from './view/best-product-dashboard/best-product-dashboard.component';
-
-
+import {OrderListComponent} from "./demo/view/Gestion des Order/order-list/order-list.component";
+import {ProductOrderComponent} from "./demo/view/Gestion des Order/product-order/product-order.component";
+import {ChartOrderComponent} from "./demo/view/Gestion des Order/chart-order/chart-order.component";
+import {OrderClientComponent} from "./demo/view/Gestion des Order/order-client/order-client.component";
+import {FrontComponent} from "./demo/view/front/front.component";
 
 @NgModule({
     imports: [
-
         RouterModule.forRoot([
+
             {
+
                 path: '', component: AppMainComponent,
                 children: [
-
-                    {path: 'addoffer', component: AddOfferComponent},
-                    {path: 'review', component: ReviewComponent},
-                    {path: 'updatereview/:id', component: UpdateReviewComponent},
-                    {path: 'getreview', component: GetReviewComponent},
-                    {path: 'bestProductsDashboard', component: BestProductDashboardComponent},
-
-
-                    {path: 'test', component: TestComponent},
                     {path: '', component: DashboardDemoComponent},
+                    {path:'uikit/ProductOrder',component:ProductOrderComponent},
+                    {path: 'uikit/chartOrder', component:ChartOrderComponent },
+                    {path: 'uikit/listOrder', component:OrderListComponent },
+
+
+                   // {path: 'orderClient', component:OrderClientComponent },
                     {path: 'uikit/formlayout', component: FormLayoutDemoComponent},
                     {path: 'uikit/floatlabel', component: FloatLabelDemoComponent},
                     {path: 'uikit/invalidstate', component: InvalidStateDemoComponent},
@@ -96,16 +76,10 @@ import { BestProductDashboardComponent } from './view/best-product-dashboard/bes
                     {path: 'pages/empty', component: EmptyDemoComponent},
                     {path: 'documentation', component: DocumentationComponent},
                     {path: 'blocks', component: BlocksComponent},
-                    {path: 'profile', component: ProfileComponent,canActivate:[AuthGuard]},
-                    {path: 'company', component: CompanyProfileComponent,canActivate:[AuthGuard]},
-                    {path: 'updateProfile', component: UpdateProfileComponent,canActivate:[AuthGuard]},
-                    {path: 'security', component: ProfileSecurityComponent,canActivate:[AuthGuard]},
-                    {path: 'getAllUsers', component: GetAllUserComponent,canActivate:[AuthGuard]},
-                    {path: 'categorie', component: CategorieComponent},
-                    {path: 'chart', component: ChartComponent},
-
                 ]
             },
+            {path: 'orderClient', component:OrderClientComponent },
+            {path: 'front', component: FrontComponent},
             {path: 'error', component: AppErrorComponent},
             {path: 'access', component: AppAccessdeniedComponent},
             {path: 'notfound', component: AppNotfoundComponent},

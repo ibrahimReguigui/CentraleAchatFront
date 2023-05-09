@@ -1,0 +1,91 @@
+<app-head-front></app-head-front>
+
+    <div class="card landing">
+        <h5>My Order</h5>
+        <p-toast></p-toast>
+
+        <p-table [value]="order1" dataKey="idOrder" [expandedRowKeys]="expandedRows" responsiveLayout="scroll">
+
+            <ng-template pTemplate="caption">
+                <button pButton icon="pi pi-fw {{isExpanded ? 'pi-minus' : 'pi-plus'}}" label="{{isExpanded ? 'Collapse All' : 'Expand All'}}" (click)="expandAll()"></button>
+                <div class="flex table-header">
+                </div>
+            </ng-template>
+
+            <ng-template pTemplate="header">
+                <tr>
+                    <th style="width: 3rem"></th>
+                    <th pSortableColumn="createdBy">Operator <p-sortIcon field="createdBy"></p-sortIcon></th>
+
+                    <th pSortableColumn="deadLine">DeadLine <p-sortIcon field="deadLine"></p-sortIcon></th>
+                    <th pSortableColumn="total">Total <p-sortIcon field="total"></p-sortIcon></th>
+                    <th pSortableColumn="status">Status <p-sortIcon field="Status"></p-sortIcon></th>
+                    <th class="confirm-header">Confirm</th>
+                    <th class=".deny-header">Deny</th>
+                    <th class="cancel-header">Canceled</th>
+                    <th class="pdf-header">Bill</th>
+
+                </tr>
+            </ng-template>
+
+            <ng-template pTemplate="body" let-order11 let-expanded="expanded">
+                <tr>
+                    <td>
+                        <button type="button" pButton pRipple [pRowToggler]="order11" class="p-button-text p-button-rounded p-button-plain" [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></button>
+                    </td>
+                    <td style="min-width: 12rem;">
+                        {{order11.createdBy}}
+                    </td>
+                 <td style="min-width: 10rem;">
+                        {{order11.deadLine | date: 'MM/dd/yyyy'}}
+                    </td>
+                    <td style="min-width: 10rem;">
+                        {{order11.total | currency:'DT ':'symbol'}}
+                    </td>
+                    <td style="min-width: 12rem;">
+                        <span [class]="'order-badge order-' + order11.status">{{order11.status}}</span>
+                    </td>
+                    <td>
+                        <button pButton pRipple type="button" [disabled]="order11.status === 'COMPLETED'|| order11.status === 'CANCELED'|| order11.status === 'RETURNED' " (click)="confirmOrder(order11.idOrder)" icon="pi pi-check" class="p-button-rounded mr-2 mb-2"></button>
+                    </td>
+                    <td>    <button pButton pRipple type="button" [disabled]=" order11.status === 'COMPLETED' ||order11.status === 'CANCELED'|| order11.status === 'RETURNED' " (click)="denyOrder(order11.idOrder)" icon="pi pi-times" class="p-button-rounded p-button-danger mr-2 mb-2"></button>
+                </td>
+                    <td>    <button pButton pRipple type="button" [disabled]="order11.status === 'PENDING'|| order11.status === 'CANCELED'|| order11.status === 'RETURNED'  " (click)="retournerOrder(order11.idOrder)" icon="pi pi-bookmark" class="p-button-rounded p-button-help mr-2 mb-2"></button>
+                </td>
+                    <td>    <button pButton type="button"*ngIf="order11.status === 'COMPLETED' || order11.status === 'RETURNED'"  class="p-button-secondary p-button-rounded mr-2 mb-2" icon="pi pi-file-pdf" (click)="generatePdf(order11.idOrder)"></button>
+                    </td>
+                </tr>
+            </ng-template>
+
+            <ng-template pTemplate="rowexpansion" let-order11>
+                <tr>
+                    <td colspan="7">
+                        <div class="p-3">
+                            <p-table [value]="order11.orderLines" dataKey="id" responsiveLayout="scroll">
+                                <ng-template pTemplate="header">
+
+                                    <tr>
+                                        <th pSortableColumn="idProduct">product <p-sortIcon field="idProduct"></p-sortIcon></th>
+                                        <th pSortableColumn="quantity">Quantity <p-sortIcon field="quantity"></p-sortIcon></th>
+
+                                    </tr>
+                                </ng-template>
+
+                               <ng-template pTemplate="body" let-orderLine1>
+                                  <tr>
+                                    <td>{{orderLine1.idProduct}}</td>
+                                    <td>{{orderLine1.quantity}}</td>
+                                      <td><p-button type="button" icon="pi pi-search"></p-button></td>
+                                   </tr>
+                               </ng-template>
+
+
+            <ng-template pTemplate="emptymessage">
+                <tr>
+                    <td colspan="6">There are no order for this product yet.</td>
+                </tr>
+
+            </ng-template>
+        </p-table>
+
+    </div>

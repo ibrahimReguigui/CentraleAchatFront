@@ -1,0 +1,96 @@
+
+
+<div class="grid">
+    <div class="col-12">
+        <div class="card">
+            <h5>Order Menu</h5>
+            <button pButton pRipple routerLink="/uikit/chartOrder" type="button" label="Calendar" class="p-button-info mr-2 mb-2"></button>
+            <button pButton pRipple routerLink="/uikit/chartOrder"  type="button" label="Order Statics" class="p-button-warning mr-2 mb-2"></button>
+            <p-table #dt1 [value]="order1" dataKey="id" [rows]="10"  [rowHover]="true" styleClass="p-datatable-gridlines" [paginator]="true" [globalFilterFields]="['clientName','deadLine','createdBy','total','status']" responsiveLayout="scroll">
+                <ng-template pTemplate="caption">
+                    <div class="flex justify-content-between flex-column sm:flex-row">
+                        <button pButton label="Clear" class="p-button-outlined mb-2" icon="pi pi-filter-slash" (click)="clear(dt1)"></button>
+                        <span class="p-input-icon-left mb-2">
+							<i class="pi pi-search"></i>
+							<input pInputText type="text" #filter (input)="dt1.filterGlobal($event.target.value,'contains')" placeholder="Search Keyword" class="w-full"/>
+						</span>
+                    </div>
+                </ng-template>
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th>
+                            <div class="flex justify-content-between align-items-center">
+                                Customer
+                                <p-columnFilter type="text" field="clientName" display="menu" placeholder="Search by clientName"></p-columnFilter>
+                            </div>
+                        </th>
+                        <th>
+                            <div class="flex justify-content-between align-items-center">
+                                Dead Line
+                                <p-columnFilter type="date" field="deadLine" display="menu" placeholder="mm/dd/yyyy"></p-columnFilter>
+                            </div>
+                        </th>
+                        <th>
+                            <div class="flex justify-content-between align-items-center">
+                                Operator
+                                <p-columnFilter type="text" field="createdBy" display="menu" placeholder="Search by operator"></p-columnFilter>
+                            </div>
+                        </th>
+                        <th>
+                            <div class="flex justify-content-between align-items-center">
+                                Total
+                                <p-columnFilter type="numeric" field="total" display="menu" currency="TND"></p-columnFilter>
+                            </div>
+                        </th>
+                        <th>
+                            <div class="flex justify-content-between align-items-center">
+                                Status
+                                <p-columnFilter field="status" matchMode="equals" display="menu">
+                                    <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                                        <p-dropdown [ngModel]="value" [options]="statuses" (onChange)="filter($event.value)" placeholder="Any" [style]="{'min-width': '12rem'}" >
+                                            <ng-template let-option pTemplate="item">
+                                                <span [class]="'order-badge order-' + option.value">{{option.label}}</span>
+                                            </ng-template>
+                                        </p-dropdown>
+                                    </ng-template>
+                                </p-columnFilter>
+                            </div>
+                        </th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-order11 >
+                    <tr>
+                        <td style="min-width: 12rem;">
+                            {{order11.clientName}}
+                        </td>
+                        <td style="min-width: 10rem;">
+                            {{order11.deadLine | date: 'MM/dd/yyyy'}}
+                        </td>
+                        <td style="min-width: 12rem;">
+                            {{order11.createdBy}}
+                        </td>
+                        <td style="min-width: 10rem;">
+                            {{order11.total | currency:'TND ':'symbol'}}
+                        </td>
+                        <td style="min-width: 12rem;">
+                            <span [class]="'order-badge order-' + order11.status">{{order11.status}}</span>
+                        </td>
+
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="emptymessage">
+                    <tr>
+                        <td colspan="7">No customers found.</td>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="loadingbody">
+                    <tr>
+                        <td colspan="7">Loading customers data. Please wait.</td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+    </div>
+</div>
+
+

@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { AppBreadcrumbService } from 'src/app/app.breadcrumb.service';
 @Component({
-  templateUrl: './blocks.component.html'
+  templateUrl: './blocks.component.html',
+    selector: 'app-front',
 })
 export class BlocksComponent{
 

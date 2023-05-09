@@ -1,18 +1,25 @@
-import {Categorie} from "./categorie";
-
-export interface Product {
-    idProduct?: number;
+export interface Productffff {
+    id?: string;
+    code?: string;
     name?: string;
     description?: string;
-     categorie?: Categorie;
-    dateEndDiscount?: Date;
-    // departement?: Departement;
+    price?: number;
+    quantity?: number;
+    inventoryStatus?: string;
+    category?: string;
+    image?: string;
+    rating?: number;
+}
+export interface Product {
+    selectedQuantity: number;
+    idProduct?: number;
+    description?: string;
+    name?: string;
+    quantity?: number;
+    image?: string;
+    unitPriceHT?: number;
     discount?: number;
     firstQuantity?: number;
-    image?: string;
     lowQuantity?: number;
-    quantity?: number;
-    // unit?: unit;
-    unitPriceHT?: number;
-
+    code?:string;
 }

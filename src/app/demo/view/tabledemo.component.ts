@@ -141,7 +141,7 @@ export class TableDemoComponent implements OnInit {
     }
 
     formatCurrency(value) {
-        return value.toLocaleString('en-US', {style: 'currency', currency: 'USD'});
+        return value.toLocaleString('en-US', {style: 'currency', currency: 'DT'});
     }
 
     clear(table: Table) {

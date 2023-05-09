@@ -1,0 +1,47 @@
+.order-badge {
+    border-radius: var(--border-radius);
+    padding: .25em .5rem;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: .3px;
+
+    &.order-COMPLETED {
+        background: #C8E6C9;
+        color: #256029;
+    }
+
+    &.order-CANCELED {
+        background: #FFCDD2;
+        color: #C63737;
+    }
+
+    &.order-PENDING {
+        background: #FEEDAF;
+        color: #8A5340;
+    }
+
+    &.order-RETURNED {
+        background: #ECCFFF;
+        color: #694382;
+    }
+}
+.confirm-header {
+    font-weight: bold;
+    color: green;
+}
+
+.deny-header {
+    font-weight: bold;
+    color: red;
+}
+
+.cancel-header {
+    font-weight: bold;
+    color: orange;
+}
+
+.pdf-header {
+    font-weight: bold;
+    color: blue;
+}
