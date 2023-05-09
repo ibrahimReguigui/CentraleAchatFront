@@ -148,6 +148,7 @@ import { UpdateReviewComponent } from './view/update-review/update-review.compon
 import { GetReviewComponent } from './view/get-review/get-review.component';
 import { AddOfferComponent } from './view/add-offer/add-offer.component';
 import { BestProductDashboardComponent } from './view/best-product-dashboard/best-product-dashboard.component';
+import { GetOfferComponent } from './view/get-offer/get-offer.component';
 
 @NgModule({
     imports: [
@@ -283,7 +284,7 @@ import { BestProductDashboardComponent } from './view/best-product-dashboard/bes
         BlocksComponent,
         BlockViewer,
         
-        ReviewComponent, TestComponent, UpdateReviewComponent, GetReviewComponent, AddOfferComponent, BestProductDashboardComponent
+        ReviewComponent, TestComponent, UpdateReviewComponent, GetReviewComponent, AddOfferComponent, BestProductDashboardComponent, GetOfferComponent
     ],
     providers: [
         {provide: LocationStrategy, useClass: HashLocationStrategy},
