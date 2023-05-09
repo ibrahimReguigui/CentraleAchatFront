@@ -1,0 +1,24 @@
+<p>review add works!</p>
+
+<form #f="ngForm" >
+
+    <label for="comment">comment: </label>
+    <input type="text" name="comment" class="form-control" [(ngModel)]="review.comment" #t="ngModel" >
+    
+
+    <label for="noteReview">noteReview : </label>
+    <input type="text" name="noteReview" class="form-control" [(ngModel)]="review.noteReview" #t="ngModel" >
+    
+    <label for="idClient">idClient : </label>
+    <input type="text" name="idClient" class="form-control" [(ngModel)]="review.idClient" #t="ngModel" >
+
+
+    <label for="idSupplier">idSupplier : </label>
+    <input type="text" name="idSupplier" class="form-control" [(ngModel)]="review.idSupplier" #t="ngModel" >
+
+    <label for="idProduct">idProduct : </label>
+    <input type="number" name="idProduct" class="form-control" [(ngModel)]="review.idProduct" #t="ngModel" >
+  
+
+    <button type="submit" (click)="save()">add</button>
+</form>  

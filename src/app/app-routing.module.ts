@@ -30,18 +30,32 @@ import {AppTimelineDemoComponent} from './pages/app.timelinedemo.component';
 import {AppInvoiceComponent} from './pages/app.invoice.component';
 import {AppHelpComponent} from './pages/app.help.component';
 import {BlocksComponent} from './blocks/blocks/blocks.component';
-import {RegistrationComponent} from "./view/registration/registration.component";
-import {ProfileComponent} from "./view/profile/profile.component";
-import {AuthGuard} from "./service/security/authGuard";
 
-//,canActivate:[AuthGuard], data:{roles:['CLIENT']
+import {ReviewComponent } from './view/review/review.component';
+import { TestComponent } from './view/test/test.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { UpdateReviewComponent } from './view/update-review/update-review.component';
+import { GetReviewComponent } from './view/get-review/get-review.component';
+import { AddOfferComponent } from './view/add-offer/add-offer.component';
+import { BestProductDashboardComponent } from './view/best-product-dashboard/best-product-dashboard.component';
+
+
 @NgModule({
     imports: [
+
         RouterModule.forRoot([
-            {path: 'register', component: RegistrationComponent},
             {
                 path: '', component: AppMainComponent,
                 children: [
+                  
+                    {path: 'addoffer', component: AddOfferComponent},
+                    {path: 'review', component: ReviewComponent},
+                    {path: 'updatereview/:id', component: UpdateReviewComponent},
+                    {path: 'getreview', component: GetReviewComponent},
+                    {path: 'bestProductsDashboard', component: BestProductDashboardComponent},
+
+
+                    {path: 'test', component: TestComponent},
                     {path: '', component: DashboardDemoComponent},
                     {path: 'uikit/formlayout', component: FormLayoutDemoComponent},
                     {path: 'uikit/floatlabel', component: FloatLabelDemoComponent},
@@ -68,10 +82,12 @@ import {AuthGuard} from "./service/security/authGuard";
                     {path: 'pages/empty', component: EmptyDemoComponent},
                     {path: 'documentation', component: DocumentationComponent},
                     {path: 'blocks', component: BlocksComponent},
-                    {path: 'profile', component: ProfileComponent,canActivate:[AuthGuard]},
-                ]
-            },
 
+                    
+
+                      ]
+            },
+            
             {path: 'error', component: AppErrorComponent},
             {path: 'access', component: AppAccessdeniedComponent},
             {path: 'notfound', component: AppNotfoundComponent},

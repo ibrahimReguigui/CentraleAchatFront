@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {AppComponent} from './app.component';
 
 @Component({
-    selector: 'app-menu',
+    selector: 'app-menu', //THE MENU ON THE LEFT OF BACK PAGE
     template: `
         <ul class="layout-menu">
             <li app-menuitem *ngFor="let item of model; let i = index;" [item]="item" [index]="i" [root]="true"></li>
@@ -20,12 +20,22 @@ export class AppMenuComponent implements OnInit {
             {
                 label: 'Favorites', icon: 'pi pi-fw pi-home',
                 items: [
-                    {label: 'Dashboard', icon: 'pi pi-fw pi-home', routerLink: ['/']}
+                    {label: 'Dashboard', icon: 'pi pi-fw pi-home', routerLink: ['/']},
+                    
                 ]
             },
             {
                 label: 'UI Kit', icon: 'pi pi-fw pi-star-fill', routerLink: ['/uikit'],
                 items: [
+                    
+                    {label: 'addoffer', icon: 'pi pi-fw pi-clone', routerLink: ['/addoffer']},  //////////////////offre url
+                    {label: 'review', icon: 'pi pi-fw pi-clone', routerLink: ['/review']},
+                    {label: 'getreview', icon: 'pi pi-fw pi-clone', routerLink: ['/getreview']},
+                   // {label: 'updatereview', icon: 'pi pi-fw pi-clone', routerLink: ['/updatereview']},
+                    {label: 'bestProductsDashboard', icon: 'pi pi-fw pi-clone', routerLink: ['/bestProductsDashboard']},
+
+
+                    
                     {label: 'Form Layout', icon: 'pi pi-fw pi-id-card', routerLink: ['/uikit/formlayout']},
                     {label: 'Input', icon: 'pi pi-fw pi-check-square', routerLink: ['/uikit/input']},
                     {label: 'Float Label', icon: 'pi pi-fw pi-bookmark', routerLink: ['/uikit/floatlabel']},
