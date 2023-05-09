@@ -12,6 +12,7 @@ import {MiscDemoComponent} from './demo/view/miscdemo.component';
 import {EmptyDemoComponent} from './demo/view/emptydemo.component';
 import {ChartsDemoComponent} from './demo/view/chartsdemo.component';
 import {FileDemoComponent} from './demo/view/filedemo.component';
+
 import {DocumentationComponent} from './demo/view/documentation.component';
 import {AppMainComponent} from './app.main.component';
 import {AppNotfoundComponent} from './pages/app.notfound.component';
@@ -37,12 +38,12 @@ import {CompanyProfileComponent} from "./view/company-profile/company-profile.co
 import {UpdateProfileComponent} from "./view/user/update-profile/update-profile.component";
 import {ProfileSecurityComponent} from "./view/user/profile-security/profile-security.component";
 import {GetAllUserComponent} from "./view/user/get-all-user/get-all-user.component";
+import {CategorieComponent} from "./demo/domain/categorie/categorie.component";
+import {ChartComponent} from "./demo/domain/chart/chart.component";
 
-//,canActivate:[AuthGuard], data:{roles:['CLIENT']
 @NgModule({
     imports: [
         RouterModule.forRoot([
-            {path: 'register', component: RegistrationComponent},
             {
                 path: '', component: AppMainComponent,
                 children: [
@@ -77,10 +78,11 @@ import {GetAllUserComponent} from "./view/user/get-all-user/get-all-user.compone
                     {path: 'updateProfile', component: UpdateProfileComponent,canActivate:[AuthGuard]},
                     {path: 'security', component: ProfileSecurityComponent,canActivate:[AuthGuard]},
                     {path: 'getAllUsers', component: GetAllUserComponent,canActivate:[AuthGuard]},
+                    {path: 'categorie', component: CategorieComponent},
+                    {path: 'chart', component: ChartComponent},
 
                 ]
             },
-
             {path: 'error', component: AppErrorComponent},
             {path: 'access', component: AppAccessdeniedComponent},
             {path: 'notfound', component: AppNotfoundComponent},
