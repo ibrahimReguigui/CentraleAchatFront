@@ -24,7 +24,11 @@ h2 {
   margin-top: 30px;
 }
 
-/* Add padding to the input elements */
-.p-inputtext {
-  padding: 0;
+
+/* Style the select element */
+select {
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  padding: 6px 10px;
+  font-size: 16px;
 }
