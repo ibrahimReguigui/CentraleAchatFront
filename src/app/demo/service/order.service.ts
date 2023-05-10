@@ -10,15 +10,15 @@ import {Bill} from "../domain/bill";
   providedIn: 'root'
 })
 export class OrderService {
-    public host:String="http://localhost:8098/order"
+    public host:String="http://localhost:8094/order"
   constructor(private http:HttpClient) { }
 
     public getOrders(): Observable<any> {
         return this.http.get<any>(this.host+"/retrieveAllOrder")
     }
 
-    saveOrder(order) {
-        return this.http.post(this.host+"/createOrder/efbedca9-55a1-4c4e-8d49-1738bae50241", order);
+    saveOrder(order,userId,offerId) {
+        return this.http.post(this.host+`/createOrder/6ed7c941-f2f4-4098-8bf3-40c08f1cf911/${userId}/${offerId}`, order);
     }
 
 

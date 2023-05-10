@@ -64,6 +64,8 @@
             <ng-template let-products pTemplate="listItem">
                 <div class="col-12">
                     <div class="flex flex-column md:flex-row align-items-center p-3 w-full">
+                        <img src="data:image/jpeg;base64,{{products.image}}" length="1px" width="1px" height="100px" class="w-9 shadow-2 my-3 mx-0"/>
+
                         <div class="flex-1 text-center md:text-left">
                             <div class="font-bold text-2xl">{{products.name}}</div>
                             <div class="mb-3">{{products.description}}</div>
@@ -94,6 +96,8 @@
                             </div>
                         </div>
                         <div class="text-center">
+                            <img src="data:image/jpeg;base64,{{products.image}}" length="1px" width="1px" height="100px" class="w-9 shadow-2 my-3 mx-0"/>
+
                             <div class="text-2xl font-bold">{{products.name}}</div>
                             <div class="mb-3">{{products.description}}</div>
 

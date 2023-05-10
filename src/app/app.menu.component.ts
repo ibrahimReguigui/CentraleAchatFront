@@ -28,7 +28,7 @@ export class AppMenuComponent implements OnInit {
                 items: [
                     {label: 'Send Order', icon: 'pi pi-fw pi-id-card', routerLink: ['/uikit/ProductOrder']},
                     {label: 'Order List', icon: 'pi pi-fw pi-id-card', routerLink: ['uikit/listOrder']},
-                   /* {label: 'Form Layout', icon: 'pi pi-fw pi-id-card', routerLink: ['/uikit/formlayout']},
+                   {label: 'Form Layout', icon: 'pi pi-fw pi-id-card', routerLink: ['/uikit/formlayout']},
                     {label: 'Input', icon: 'pi pi-fw pi-check-square', routerLink: ['/uikit/input']},
                     {label: 'Float Label', icon: 'pi pi-fw pi-bookmark', routerLink: ['/uikit/floatlabel']},
                     {label: 'Invalid State', icon: 'pi pi-fw pi-exclamation-circle', routerLink: ['/uikit/invalidstate']},
@@ -44,7 +44,7 @@ export class AppMenuComponent implements OnInit {
                     {label: 'File', icon: 'pi pi-fw pi-file', routerLink: ['/uikit/file']},
                     {label: 'Chart', icon: 'pi pi-fw pi-chart-bar', routerLink: ['/uikit/charts']},
                     {label: 'Misc', icon: 'pi pi-fw pi-circle-off', routerLink: ['/uikit/misc']}
-                */]
+                ]
             },
             {
                 label:'Client Order', icon:'pi pi-fw pi-prime', routerLink: ['/blocks'],

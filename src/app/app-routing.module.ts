@@ -35,6 +35,16 @@ import {ProductOrderComponent} from "./demo/view/Gestion des Order/product-order
 import {ChartOrderComponent} from "./demo/view/Gestion des Order/chart-order/chart-order.component";
 import {OrderClientComponent} from "./demo/view/Gestion des Order/order-client/order-client.component";
 import {FrontComponent} from "./demo/view/front/front.component";
+import {ProductComponent} from "./product/product.component";
+import {CategorieComponent} from "./demo/domain/categorie/categorie.component";
+import {ProfileComponent} from "./view/user/user-profile/profile.component";
+import { UpdateProfileComponent } from './view/user/update-profile/update-profile.component';
+import {AuthGuard} from "./service/security/authGuard";
+import {GetAllUserComponent} from "./view/user/get-all-user/get-all-user.component";
+import {ProfileSecurityComponent} from "./view/user/profile-security/profile-security.component";
+import {CompanyProfileComponent} from "./view/company-profile/company-profile.component";
+import {AddOfferComponent} from "./view/add-offer/add-offer.component";
+import {GetOfferComponent} from "./view/get-offer/get-offer.component";
 
 @NgModule({
     imports: [
@@ -45,7 +55,18 @@ import {FrontComponent} from "./demo/view/front/front.component";
                 path: '', component: AppMainComponent,
                 children: [
                     {path: '', component: DashboardDemoComponent},
-                    {path:'uikit/ProductOrder',component:ProductOrderComponent},
+                    {path: 'profile', component: ProfileComponent,canActivate:[AuthGuard]},
+                    {path: 'company', component: CompanyProfileComponent,canActivate:[AuthGuard]},
+                    {path: 'updateProfile', component: UpdateProfileComponent,canActivate:[AuthGuard]},
+                    {path: 'security', component: ProfileSecurityComponent,canActivate:[AuthGuard]},
+                    {path: 'getAllUsers', component: GetAllUserComponent,canActivate:[AuthGuard]},
+
+
+
+                    {path:'offer',component:AddOfferComponent},
+                    {path:'getOffer',component:GetOfferComponent},
+
+                    {path:'uikit/ProductOrder/:id',component:ProductOrderComponent},
                     {path: 'uikit/chartOrder', component:ChartOrderComponent },
                     {path: 'uikit/listOrder', component:OrderListComponent },
 
@@ -76,6 +97,9 @@ import {FrontComponent} from "./demo/view/front/front.component";
                     {path: 'pages/empty', component: EmptyDemoComponent},
                     {path: 'documentation', component: DocumentationComponent},
                     {path: 'blocks', component: BlocksComponent},
+                    {path: 'product', component: ProductComponent},
+                    {path: 'categorie', component: CategorieComponent}
+
                 ]
             },
             {path: 'orderClient', component:OrderClientComponent },

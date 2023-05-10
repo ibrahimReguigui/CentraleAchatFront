@@ -6,6 +6,8 @@ import {AppBreadcrumbService} from "../../../../app.breadcrumb.service";
 import {OrderService} from "../../../service/order.service";
 import {OrderLine} from "../../../domain/order-line";
 import {Order} from "../../../domain/order";
+import {UserServiceService} from "../../../../service/user/user-service.service";
+import {ActivatedRoute} from "@angular/router";
 
 
 @Component({
@@ -15,6 +17,7 @@ import {Order} from "../../../domain/order";
 })
 export class ProductOrderComponent {
 
+    idOffer:any
     products: Product[];
 
     orderLines: OrderLine[] = [];
@@ -45,10 +48,10 @@ export class ProductOrderComponent {
 
     value: any;
 
+user:any;
 
 
-
-    constructor(private productService: ProductService,private  orderService:OrderService, private breadcrumbService: AppBreadcrumbService) {
+    constructor(private userService:UserServiceService,private ac:ActivatedRoute,private productService: ProductService,private  orderService:OrderService, private breadcrumbService: AppBreadcrumbService) {
         this.breadcrumbService.setItems([
             {label: 'Order Management'},
             {label: 'Send Order'}
@@ -56,6 +59,13 @@ export class ProductOrderComponent {
     }
 
     ngOnInit() {
+this.idOffer=this.ac.snapshot.paramMap.get("id");
+        console.log(this.idOffer)
+        this.userService.getProfile().subscribe(
+            r=>{
+                this.user=r;
+            })
+
         this.productService.getAllProducts().subscribe(data => this.products = data);
 
 
@@ -99,7 +109,7 @@ console.log(products)
             orderLines: this.orderLines
         };
         console.log(order)
-        this.orderService.saveOrder(order).subscribe();
+        this.orderService.saveOrder(order,this.user.sub,this.idOffer).subscribe();
         this.orderLines = [];
         this.deadLine = null;
     }

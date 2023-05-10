@@ -2,12 +2,13 @@ import {Component, AfterViewInit, Renderer2, OnDestroy, OnInit} from '@angular/c
 import { MenuService } from './app.menu.service';
 import { PrimeNGConfig } from 'primeng/api';
 import { AppComponent } from './app.component';
+import {UserServiceService} from "./service/user/user-service.service";
 
 @Component({
     selector: 'app-main',
     templateUrl: './app.main.component.html'
 })
-export class AppMainComponent implements AfterViewInit, OnDestroy {
+export class AppMainComponent implements AfterViewInit, OnDestroy,OnInit {
 
     rotateMenuButton: boolean;
 
@@ -40,8 +41,17 @@ export class AppMainComponent implements AfterViewInit, OnDestroy {
     searchClick = false;
 
     search = false;
+    user:any;
+    ngOnInit() {
 
-    constructor(public renderer: Renderer2, private menuService: MenuService, private primengConfig: PrimeNGConfig,
+
+            this.userService.getProfile().subscribe(
+                r=>{
+                    console.log(r)
+                })
+
+    }
+    constructor(public userService: UserServiceService,public renderer: Renderer2, private menuService: MenuService, private primengConfig: PrimeNGConfig,
                 public app: AppComponent) { }
 
     ngAfterViewInit() {

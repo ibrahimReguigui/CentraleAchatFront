@@ -1,3 +1,5 @@
+import {Categorie} from "./categorie";
+
 export interface Productffff {
     id?: string;
     code?: string;
@@ -11,15 +13,19 @@ export interface Productffff {
     rating?: number;
 }
 export interface Product {
-    selectedQuantity: number;
+
     idProduct?: number;
-    description?: string;
     name?: string;
-    quantity?: number;
-    image?: string;
-    unitPriceHT?: number;
+    description?: string;
+    categorie?: Categorie;
+    dateEndDiscount?: Date;
+// departement?: Departement;
     discount?: number;
     firstQuantity?: number;
+    image?: string;
     lowQuantity?: number;
-    code?:string;
+    quantity?: number;
+// unit?: unit;
+    unitPriceHT?: number;
+    selectedQuantity?: number;
 }

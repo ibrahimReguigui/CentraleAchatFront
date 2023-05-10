@@ -14,11 +14,10 @@ import {OrderService} from "../../../service/order.service";
 import { jsPDF } from "jspdf";
 //import 'jspdf-autotable';
 import pdfMake from 'pdfmake/build/pdfmake';
-import pdfFonts from 'pdfmake/build/vfs_fonts';
 import {AppMainComponent} from "../../../../app.main.component";
 import {NotificationService} from "../../../service/notification.service";
-pdfMake.vfs = pdfFonts.pdfMake.vfs;
 import qrcode from 'qrcode';
+import {UserServiceService} from "../../../../service/user/user-service.service";
 
 @Component({
     selector: 'app-order-client',
@@ -74,14 +73,19 @@ export class OrderClientComponent implements OnInit{
 
 
 
+user:any;
 
-
-    constructor(private notificationService: NotificationService,private orderService: OrderService, public breadcrumbService: AppBreadcrumbService, private messageService: MessageService, private confirmService: ConfirmationService, private cd: ChangeDetectorRef) {
+    constructor(private userService:UserServiceService, private notificationService: NotificationService,private orderService: OrderService, public breadcrumbService: AppBreadcrumbService, private messageService: MessageService, private confirmService: ConfirmationService, private cd: ChangeDetectorRef) {
         this.breadcrumbService.setItems([
             {label: 'Client'}
         ]);
     }
     ngOnInit(): void {
+
+            this.userService.getProfile().subscribe(
+                r=>{
+                    this.user=r;
+                })
 
         this.orderService.getOrders().subscribe(data =>{
             // @ts-ignore

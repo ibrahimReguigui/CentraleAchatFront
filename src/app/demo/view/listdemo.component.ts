@@ -5,7 +5,6 @@ import {ProductService} from '../service/productservice';
 import {AppBreadcrumbService} from '../../app.breadcrumb.service';
 
 @Component({
-    selector:'app-nadhir',
     templateUrl: './listdemo.component.html',
     styleUrls: ['../../../assets/demo/badges.scss']
 
@@ -26,8 +25,6 @@ export class ListDemoComponent implements OnInit {
 
     orderCities: any[];
 
-    selectedProducts: Product[] = [];
-
     constructor(private productService: ProductService, private breadcrumbService: AppBreadcrumbService) {
         this.breadcrumbService.setItems([
             {label: 'UI Kit'},
@@ -36,26 +33,23 @@ export class ListDemoComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.productService.getProducts().then(data => this.products = data);
+        this.productService.getAllProducts().subscribe(data => this.products = data);
+
 
         this.sourceCities = [
-            {name: 'San Francisco', code: 'SF'},
-            {name: 'London', code: 'LDN'},
-            {name: 'Paris', code: 'PRS'},
-            {name: 'Istanbul', code: 'IST'},
-            {name: 'Berlin', code: 'BRL'},
-            {name: 'Barcelona', code: 'BRC'},
-            {name: 'Rome', code: 'RM'}];
+            { field: 'name', header: 'name' },
+            { field: 'description', header: 'description' },
+            { field: 'quantity', header: 'quantity' },
+            { field: 'unitPriceHT', header: 'unitPriceHT' },
+        ];
+
         this.targetCities = [];
 
         this.orderCities = [
-            {name: 'San Francisco', code: 'SF'},
-            {name: 'London', code: 'LDN'},
-            {name: 'Paris', code: 'PRS'},
-            {name: 'Istanbul', code: 'IST'},
-            {name: 'Berlin', code: 'BRL'},
-            {name: 'Barcelona', code: 'BRC'},
-            {name: 'Rome', code: 'RM'}];
+            { field: 'name', header: 'name' },
+            { field: 'description', header: 'description' },
+            { field: 'quantity', header: 'quantity' },
+            { field: 'unitPriceHT', header: 'unitPriceHT' },];
 
         this.sortOptions = [
             {label: 'Price High to Low', value: '!price'},
@@ -63,16 +57,6 @@ export class ListDemoComponent implements OnInit {
         ];
     }
 
-
-
-
-    addToCart(product: Product) {
-        if (product.quantity > 0) {
-            const selectedProduct = { ...product }; // Create a copy of the product object
-            this.selectedProducts.push(selectedProduct); // Add the selected product to the array
-            product.quantity = 0; // Reset the quantity to zero
-        }
-    }
     onSortChange(event) {
         const value = event.value;
 

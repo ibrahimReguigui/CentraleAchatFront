@@ -1,4 +1,4 @@
-import {NgModule, CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
+import {NgModule, CUSTOM_ELEMENTS_SCHEMA, APP_INITIALIZER} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import {BrowserModule} from '@angular/platform-browser';
@@ -145,10 +145,23 @@ import { ProductOrderComponent } from './demo/view/Gestion des Order/product-ord
 import { ChartOrderComponent } from './demo/view/Gestion des Order/chart-order/chart-order.component';
 import { OrderClientComponent } from './demo/view/Gestion des Order/order-client/order-client.component';
 import { FrontComponent } from './demo/view/front/front.component';
+import {CategorieComponent} from "./demo/domain/categorie/categorie.component";
+import {ProfileComponent} from "./view/user/user-profile/profile.component";
+import {UpdateProfileComponent} from "./view/user/update-profile/update-profile.component";
+import {RegistrationComponent} from "./view/registration/registration.component";
+import {CompanyProfileComponent} from "./view/company-profile/company-profile.component";
+import {ProfileSecurityComponent} from "./view/user/profile-security/profile-security.component";
+import {GetAllUserComponent} from "./view/user/get-all-user/get-all-user.component";
+import {RecaptchaModule} from "ng-recaptcha";
+import {KeycloakAngularModule, KeycloakService} from "keycloak-angular";
+import {initializeKeycloak} from "./service/security/initializeKeycloak";
+import {AddOfferComponent} from "./view/add-offer/add-offer.component";
+import {GetOfferComponent} from "./view/get-offer/get-offer.component";
 
 
 @NgModule({
     imports: [
+        RecaptchaModule,
         BrowserModule,
         FormsModule,
         AppRoutingModule,
@@ -234,7 +247,9 @@ import { FrontComponent } from './demo/view/front/front.component';
         TreeModule,
         TreeTableModule,
         VirtualScrollerModule,
-        AppCodeModule
+        AppCodeModule,
+        KeycloakAngularModule,
+
     ],
     declarations: [
         AppComponent,
@@ -282,9 +297,26 @@ import { FrontComponent } from './demo/view/front/front.component';
         ProductOrderComponent,
         ChartOrderComponent,
         OrderClientComponent,
-        FrontComponent
+        FrontComponent,
+        CategorieComponent,
+        ProfileComponent,
+        UpdateProfileComponent,
+        RegistrationComponent,
+        ProfileComponent,
+        CompanyProfileComponent,
+        UpdateProfileComponent,
+        ProfileSecurityComponent,
+        GetAllUserComponent,
+        AddOfferComponent,
+        GetOfferComponent
     ],
     providers: [
+        {
+            provide: APP_INITIALIZER,
+            useFactory: initializeKeycloak,
+            multi: true,
+            deps: [KeycloakService],
+        },
         {provide: LocationStrategy, useClass: HashLocationStrategy},
         CountryService, CustomerService, EventService, IconService, NodeService,
         PhotoService, ProductService, MenuService, AppBreadcrumbService, ConfigService
