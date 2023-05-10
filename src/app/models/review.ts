@@ -1,9 +1,10 @@
 export class review {
   idReview?: number;
   comment?: string;
-  noteReview?: string;
+  noteReview?: number;
+  avis?: string;
   idClient?: string;
   idSupplier?: string;
-  idProduct?: number;
+  idProduct?: string;
 
 }

@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 
 import { OffreService } from './offre.service';
-import { OffreComponent } from '../view/offre/offre.component';
+//import { OffreComponent } from '../view/offre/offre.component';
 
 describe('OffreService', () => {
   let service: OffreService;
@@ -9,7 +9,7 @@ describe('OffreService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({});
     service = TestBed.inject(OffreService);
-    declarations:[OffreComponent]
+   // declarations:[OffreComponent]
   });
 
   it('should be created', () => {

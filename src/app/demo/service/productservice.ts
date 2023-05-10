@@ -2,10 +2,14 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 import { Product } from '../domain/product';
+import { catchError, map, shareReplay } from 'rxjs';
 
 @Injectable()
 export class ProductService {
-
+    private readonly products$ = this.http.get<any[]>("assets/demo/data/products.json").pipe(
+        shareReplay(1)
+      );
+      
     constructor(private http: HttpClient) { }
 
     getProductsSmall() {
@@ -23,10 +27,8 @@ export class ProductService {
     }
 
     getProductById(id: any) {
-        return this.http.get<any>('assets/demo/data/products.json')
-            .toPromise()
-            .then(res => res.data.find(r => { return r.id === id }))
-            .then(data => data as Product);
+        return this.products$.pipe(
+            map((p:any) => p.data.find(c => c.id === id)))
     }
 
     getProductsMixed() {

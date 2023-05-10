@@ -34,11 +34,12 @@ import {BlocksComponent} from './blocks/blocks/blocks.component';
 import {ReviewComponent } from './view/review/review.component';
 import { TestComponent } from './view/test/test.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { UpdateReviewComponent } from './view/update-review/update-review.component';
+//import { UpdateReviewComponent } from './view/update-review/update-review.component';
 import { GetReviewComponent } from './view/get-review/get-review.component';
 import { AddOfferComponent } from './view/add-offer/add-offer.component';
+//import { UpdateOfferComponent } from './view/update-offer/update-offer.component';
 import { BestProductDashboardComponent } from './view/best-product-dashboard/best-product-dashboard.component';
-
+import { UpdateReviewComponent } from './update-review/update-review.component';
 
 @NgModule({
     imports: [
@@ -49,6 +50,8 @@ import { BestProductDashboardComponent } from './view/best-product-dashboard/bes
                 children: [
                   
                     {path: 'addoffer', component: AddOfferComponent},
+                   // {path: 'updateoffer', component: UpdateOfferComponent},
+                    
                     {path: 'review', component: ReviewComponent},
                     {path: 'updatereview/:id', component: UpdateReviewComponent},
                     {path: 'getreview', component: GetReviewComponent},

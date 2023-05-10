@@ -18,10 +18,26 @@ export class OffreService {
     return this.http.get(this.apiUrl+'/getoffer');
   }
 
+ /*  getOfferById(id: number): Observable<Offer> {
+    return this.http.get<Offer>(`${this.apiUrl}/getOffer/${id}`);
+  } */
+
+ /*  getAllOffers(): Observable<Offer[]> {
+    return this.http.get<Offer[]>(`${this.apiUrl}/getOffer`);
+  } */
+
   addOffer(Offer: Offer) {
     return this.http.post(`${this.apiUrl}/addOffer`, Offer) ;
   }
+/*   updateOffer(offer : any) {
+ 
+    return this.http.put(`${this.apiUrl}/updateOffer`,offer) ;
 
+  }
+
+  deleteOffer(offerId: number): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/deleteOffer/${offerId}`);
+  } */
 
 }
 

@@ -144,11 +144,11 @@ import {AppBreadcrumbService} from './app.breadcrumb.service';
 import { ReviewComponent } from './view/review/review.component';
 import { TestComponent } from './view/test/test.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { UpdateReviewComponent } from './view/update-review/update-review.component';
 import { GetReviewComponent } from './view/get-review/get-review.component';
 import { AddOfferComponent } from './view/add-offer/add-offer.component';
 import { BestProductDashboardComponent } from './view/best-product-dashboard/best-product-dashboard.component';
-import { GetOfferComponent } from './view/get-offer/get-offer.component';
+import { UpdateReviewComponent } from './update-review/update-review.component';
+
 
 @NgModule({
     imports: [
@@ -284,7 +284,7 @@ import { GetOfferComponent } from './view/get-offer/get-offer.component';
         BlocksComponent,
         BlockViewer,
         
-        ReviewComponent, TestComponent, UpdateReviewComponent, GetReviewComponent, AddOfferComponent, BestProductDashboardComponent, GetOfferComponent
+        ReviewComponent, TestComponent, GetReviewComponent, AddOfferComponent, BestProductDashboardComponent, UpdateReviewComponent,
     ],
     providers: [
         {provide: LocationStrategy, useClass: HashLocationStrategy},

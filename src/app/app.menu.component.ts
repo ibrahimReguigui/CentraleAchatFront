@@ -28,7 +28,9 @@ export class AppMenuComponent implements OnInit {
                 label: 'UI Kit', icon: 'pi pi-fw pi-star-fill', routerLink: ['/uikit'],
                 items: [
                     
-                    {label: 'addoffer', icon: 'pi pi-fw pi-clone', routerLink: ['/addoffer']},  //////////////////offre url
+                    {label: 'addoffer', icon: 'pi pi-fw pi-clone', routerLink: ['/addoffer']}, 
+                    {label: 'updateoffer', icon: 'pi pi-fw pi-clone', routerLink: ['/updateoffer']},
+                   
                     {label: 'review', icon: 'pi pi-fw pi-clone', routerLink: ['/review']},
                     {label: 'getreview', icon: 'pi pi-fw pi-clone', routerLink: ['/getreview']},
                    // {label: 'updatereview', icon: 'pi pi-fw pi-clone', routerLink: ['/updatereview']},

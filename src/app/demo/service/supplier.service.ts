@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Supplier } from '../domain/supplier';
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +15,6 @@ export class SupplierService {
       .then(res => res.data.find(r => {
         return r.id === id;
       }))
-      .then(data => data);
+      .then(data => data as Supplier);
   }
 }
