@@ -6,6 +6,7 @@ import { LivreurStatistics } from 'src/app/model/livreur-statistics';
 import { Userdto } from 'src/app/model/userdto';
 import { HttpClient } from '@angular/common/http';
 import { AppBreadcrumbService } from 'src/app/app.breadcrumb.service';
+import { MessageService } from 'primeng/api';
 
 
 
@@ -23,6 +24,10 @@ export class LivraisonComponent implements OnInit {
   selectedLivraison: Livraison | null = null;
   idLivreur: string = '';
   codeBill: number | null = null;
+  codeBillSelected: string | null = null;
+  errorMessage: string = '';
+
+
 
   selectedChartType: string = 'bar';
 
@@ -52,7 +57,7 @@ export class LivraisonComponent implements OnInit {
   selectedUser: Userdto;
 
 
-  constructor(private livraisonService: LivraisonService, private http: HttpClient,private breadcrumbService: AppBreadcrumbService) {
+  constructor(private livraisonService: LivraisonService, private messageService: MessageService,private http: HttpClient,private breadcrumbService: AppBreadcrumbService) {
 
     this.breadcrumbService.setItems([
       { label: 'Pages' },
@@ -128,7 +133,7 @@ export class LivraisonComponent implements OnInit {
 
 
 
-  onCodeBillInput(): void {
+  onCodeBillSelected(): void {
     if (this.codeBill) {
       this.livraisonService.affecterLivreurVehicule(this.codeBill).subscribe(
         () => {
@@ -140,7 +145,6 @@ export class LivraisonComponent implements OnInit {
       );
     }
   }
-
 
   sendToTelegram(livraison: Livraison): void {
     const botToken = '5545497438:AAG6eZFigZ_D3hGXBswWEfqUhl5a_ysFR8A';
@@ -160,14 +164,40 @@ export class LivraisonComponent implements OnInit {
     this.http.get(url).subscribe(
       () => {
         console.log('Message sent to Telegram successfully');
+        this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Livraison  Sent ', life: 3000 });
         this.successMessage = 'Message sent to Telegram successfully';
         setTimeout(() => {
           this.successMessage = null;
         }, 3000);
+       
+
       },
       error => console.error('Error sending message to Telegram:', error)
     );
 
   }
+
+  affecterLivreurVehicule(): void {
+    if (this.codeBillSelected) {
+      const codeBill = parseInt(this.codeBillSelected);
+      if (!isNaN(codeBill)) {
+        this.livraisonService.affecterLivreurVehicule(codeBill).subscribe(
+          () => {
+            this.successMessage = 'Livreur and vehicule affected successfully';
+          },
+          (error) => {
+            console.error('Error affecting livreur and vehicule:', error);
+            this.errorMessage = 'An error occurred while affecting livreur and vehicule';
+          }
+        );
+      } else {
+        this.errorMessage = 'Please enter a valid code bill';
+      }
+    } else {
+      this.errorMessage = 'Please select a code bill';
+    }
+  }
+  
+  
 
 }

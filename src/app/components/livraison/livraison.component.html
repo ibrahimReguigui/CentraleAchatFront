@@ -17,8 +17,19 @@
     </div>
   </div>
 -->
+ <!-- Add a div to contain the input fields
+ <div>
+  <h2>Affecter Livreur Vehicule</h2>
+  <label for="code-bill-select">Select a CodeBill:</label>
+  <select [(ngModel)]="codeBillSelected" name="code-bill-select" id="code-bill-select">
+    <option *ngFor="let code of codeBill" [value]="code">{{ code }}</option>
+  </select>
+  <button (click)="affecterLivreurVehicule()" class="p-button p-element p-ripple" type="button">Affecter</button>
+</div>
+
+ -->
+
   <div class="col-12 col-md-6 mb-3 mb-md-0">
-    <div *ngIf="successMessage" class="alert alert-success mt-3">{{ successMessage }}</div>
 
     <p-table #dt [value]="livraisons" [columns]="cols" responsiveLayout="scroll" [rows]="10"
       [globalFilterFields]="['idLivraison', 'code', 'statusLivraison', 'Description', 'dateLivraisonPrevue', 'dateLivraison', 'idLivreur', 'createdAt']"
@@ -29,6 +40,8 @@
       <ng-template pTemplate="caption">
         <div class="flex flex-column md:flex-row md:justify-content-between md:align-items-center">
           <h5 class="m-0">Manage Livraisons</h5>
+          <div *ngIf="successMessage" class="success-message">{{ successMessage }}</div>
+
           <span class="w-full sm:w-auto">
             <i class="pi pi-search"></i>
             <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')"
@@ -93,6 +106,7 @@
           </td>
           <td>
             <button class="btn-send-to-telegram" (click)="sendToTelegram(livraison)">Send to Telegram</button>
+         
           </td>          
         </tr>
       </ng-template>

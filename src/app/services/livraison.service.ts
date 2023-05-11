@@ -3,6 +3,8 @@ import { Injectable } from '@angular/core';
 import { Livraison } from '../model/livraison';
 import { Observable } from 'rxjs';
 import { Userdto } from '../model/userdto';
+import { HttpParams } from '@angular/common/http';
+
 
 
 @Injectable({
@@ -17,9 +19,12 @@ export class LivraisonService {
 
   constructor(private httpClient: HttpClient) {}
 
-  affecterLivreurVehicule(codeBill: number): Observable<void> {
-    return this.httpClient.post<void>(`${this.baseUrl}/affecterLivreurVehicule`, codeBill);
+  affecterLivreurVehicule(codeBill: number): Observable<any> {
+    const url = `${this.baseUrl}/affecterLivreurVehicule`;
+    const params = new HttpParams().set('codeBill', codeBill.toString());
+    return this.httpClient.post<any>(url, params);
   }
+  
 
   getLivraisonByCode(code: string): Observable<Livraison> {
     return this.httpClient.get<Livraison>(`${this.baseUrl}/livraisons/${code}`);
